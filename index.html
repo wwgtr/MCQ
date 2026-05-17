@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Business & Administrative English Quiz</title>
+    <title>اختبار MCQ - Basic Business & Administrative English</title>
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #16a085;
-            --bg-color: #f8f9fa;
+            --bg-color: #f4f6f7;
             --card-bg: #ffffff;
-            --text-color: #333;
-            --success-color: #27ae60;
-            --error-color: #c0392b;
+            --text-color: #2c3e50;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --accent-color: #34495e;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,110 +26,174 @@
         .container {
             max-width: 850px;
             margin: 0 auto;
+            padding-top: 80px; /* لترك مساحة لشريط النتيجة الثابت */
         }
+        
+        /* شريط النتيجة والدرجة النهائية المتطور */
+        .score-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .score-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+        .score-box.highlight {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .score-num {
+            color: #f1c40f;
+            font-size: 1.3rem;
+        }
+
         h1 {
             text-align: center;
             color: var(--primary-color);
             margin-bottom: 5px;
+            font-size: 2.2rem;
+            letter-spacing: 0.5px;
         }
         .subtitle {
             text-align: center;
             color: #7f8c8d;
             margin-bottom: 30px;
             font-size: 1.1rem;
+            font-weight: 500;
         }
-        .quiz-info {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        
+        /* قسم الاقتراحات الجمالي */
         .suggestions-box {
-            background-color: #e8f8f5;
+            background-color: #fff;
             border-left: 5px solid var(--secondary-color);
             padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 30px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
         .suggestions-box h3 {
             margin-top: 0;
             color: var(--secondary-color);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .suggestions-box ul {
             margin-bottom: 0;
             padding-left: 20px;
         }
         .suggestions-box li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
         }
+        
+        /* كروت الأسئلة */
         .question-card {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
             margin-bottom: 25px;
-            border: 1px solid #e1e8ed;
+            border: 1px solid #eef2f5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
         }
         .question-text {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             color: var(--primary-color);
+            line-height: 1.4;
         }
+        
+        /* قائمة الخيارات وتأثيراتها */
         .options-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         .option-item {
-            padding: 12px 15px;
-            background: #f1f2f6;
-            margin-bottom: 8px;
-            border-radius: 6px;
+            padding: 14px 18px;
+            background: #f8fafc;
+            margin-bottom: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #edf2f7;
+            font-size: 1rem;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
         }
         .option-item:hover {
-            background: #e4e7eb;
+            background: #edf2f7;
+            border-color: #cbd5e0;
+            transform: translateX(4px);
         }
         .option-item.correct {
-            background-color: #d4edda !important;
+            background-color: #e8f5e9 !important;
             border-color: var(--success-color) !important;
-            color: #155724 !important;
+            color: #1b5e20 !important;
             font-weight: bold;
+            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.2);
         }
         .option-item.incorrect {
-            background-color: #f8d7da !important;
+            background-color: #ffebee !important;
             border-color: var(--error-color) !important;
-            color: #721c24 !important;
+            color: #b71c1c !important;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
         }
         .disabled {
             pointer-events: none;
+            opacity: 0.8;
         }
+        
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            border-top: 1px solid #e1e8ed;
-            color: #7f8c8d;
+            margin-top: 60px;
+            padding: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
             font-weight: bold;
             font-size: 1.1rem;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
+<div class="score-board">
+    <div>اختبار MCQ الإنجليزي الإداري</div>
+    <div class="score-box" id="score-container">الدرجة النهائية: <span class="score-num" id="live-score">0</span> / 200</div>
+    <div class="score-box">التقدم: <span id="answered-count">0</span> / 200</div>
+</div>
+
 <div class="container">
-    <h1>Basic Business & Administrative English Quiz</h1>
-    <div class="subtitle">College of Administration & Economics</div>
-    
-    <div class="quiz-info">Total Questions: 200 | Covered: Lecture 1 & Lecture 2</div>
+    <h1>اختبار MCQ</h1>
+    <div class="subtitle">Basic Business & Administrative English | Lecture 1 & Lecture 2</div>
     
     <div class="suggestions-box">
         <h3>💡 Study Suggestions & Exam Tips</h3>
@@ -351,7 +416,13 @@ const quizData = [
     { q: "205. An email that lacks a subject line and proper closing can be perceived as unprofessional by the reader.", a: ["True", "False"], c: 0 }
 ];
 
+let correctAnswersCount = 0;
+let totalAnsweredCount = 0;
+
 const container = document.getElementById('quiz-container');
+const liveScoreElement = document.getElementById('live-score');
+const answeredCountElement = document.getElementById('answered-count');
+const scoreContainer = document.getElementById('score-container');
 
 quizData.forEach((item, qIndex) => {
     const card = document.createElement('div');
@@ -374,12 +445,23 @@ quizData.forEach((item, qIndex) => {
             const allOptions = optionsList.querySelectorAll('.option-item');
             allOptions.forEach(opt => opt.classList.add('disabled'));
             
+            totalAnsweredCount++;
+            answeredCountElement.innerText = totalAnsweredCount;
+            
             if (oIndex === item.c) {
                 optionItem.classList.add('correct');
+                correctAnswersCount++;
             } else {
                 optionItem.classList.add('incorrect');
                 allOptions[item.c].classList.add('correct');
             }
+            
+            // تحديث النتيجة التلقائية من 200
+            liveScoreElement.innerText = correctAnswersCount;
+            
+            // تأثير بصري خفيف على لوحة النتيجة عند الإجابة
+            scoreContainer.classList.add('highlight');
+            setTimeout(() => scoreContainer.classList.remove('highlight'), 300);
         });
         
         optionsList.appendChild(optionItem);
