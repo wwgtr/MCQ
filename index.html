@@ -14,6 +14,8 @@
             --success-color: #2ecc71;
             --error-color: #e74c3c;
             --accent-color: #34495e;
+            --telegram-color: #0088cc;
+            --instagram-color: #e1306c;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,10 +28,9 @@
         .container {
             max-width: 850px;
             margin: 0 auto;
-            padding-top: 80px; /* لترك مساحة لشريط النتيجة الثابت */
+            padding-top: 80px;
         }
         
-        /* شريط النتيجة والدرجة النهائية المتطور */
         .score-board {
             position: fixed;
             top: 0;
@@ -79,7 +80,6 @@
             font-weight: 500;
         }
         
-        /* قسم الاقتراحات الجمالي */
         .suggestions-box {
             background-color: #fff;
             border-left: 5px solid var(--secondary-color);
@@ -92,9 +92,6 @@
             margin-top: 0;
             color: var(--secondary-color);
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         .suggestions-box ul {
             margin-bottom: 0;
@@ -107,7 +104,6 @@
             line-height: 1.5;
         }
         
-        /* كروت الأسئلة */
         .question-card {
             background: var(--card-bg);
             padding: 25px;
@@ -129,7 +125,6 @@
             line-height: 1.4;
         }
         
-        /* قائمة الخيارات وتأثيراتها */
         .options-list {
             list-style: none;
             padding: 0;
@@ -145,8 +140,6 @@
             border: 2px solid #edf2f7;
             font-size: 1rem;
             color: #4a5568;
-            display: flex;
-            align-items: center;
         }
         .option-item:hover {
             background: #edf2f7;
@@ -171,14 +164,46 @@
             opacity: 0.8;
         }
         
+        /* قسم الحسابات الشخصية للتواصل الاجتماعي */
+        .social-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .social-link.telegram {
+            background-color: var(--telegram-color);
+        }
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
         footer {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 40px;
             padding: 25px;
             border-top: 1px solid #e2e8f0;
             color: #718096;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             letter-spacing: 0.5px;
         }
     </style>
@@ -198,15 +223,24 @@
     <div class="suggestions-box">
         <h3>💡 Study Suggestions & Exam Tips</h3>
         <ul>
-            <li><strong>Vocabulary Upgrades:</strong> Focus heavily on transforming informal words into formal alternatives (e.g., <em>want → request</em>, <em>tell → inform</em>, <em>get → obtain</em>) as these are highly expected in administrative settings.</li>
-            <li><strong>Preposition Precision:</strong> Remember key combinations like <em>"responsible for"</em>, <em>"in charge of"</em>, and <em>"report to"</em>. They are standard parts of workplace expressions.</li>
-            <li><strong>Email Layout:</strong> Keep paragraphs short (2-3 sentences) for optimal digital readability, and never omit the concise 4-part structure (Subject, Greeting, Body, Closing).</li>
-            <li><strong>Financial Formulas:</strong> Keep the basic conditions in mind: <strong>Profit</strong> requires Income > Expenses, while <strong>Loss</strong> occurs when Expenses > Income.</li>
+            <li><strong>Vocabulary Upgrades:</strong> Focus heavily on transforming informal words into formal alternatives (e.g., <em>want → request</em>, <em>tell → inform</em>, <em>get → obtain</em>) as these are highly expected in administrative settings. [cite: 23]</li>
+            <li><strong>Preposition Precision:</strong> Remember key combinations like <em>"responsible for"</em>, <em>"in charge of"</em>, and <em>"report to"</em>. They are standard parts of workplace expressions. [cite: 8]</li>
+            <li><strong>Email Layout:</strong> Keep paragraphs short (2-3 sentences) for optimal digital readability, and never omit the concise 4-part structure (Subject, Greeting, Body, Closing). [cite: 27]</li>
+            <li><strong>Financial Formulas:</strong> Keep the basic conditions in mind: <strong>Profit</strong> requires Income > Expenses, while <strong>Loss</strong> occurs when Expenses > Income. [cite: 7]</li>
         </ul>
     </div>
     
     <div id="quiz-container"></div>
     
+    <div class="social-contacts">
+        <a href="https://t.me/WWGTR" target="_blank" class="social-link telegram">
+            ✈ Telegram: @WWGTR
+        </a>
+        <a href="https://instagram.com/NE_7U" target="_blank" class="social-link instagram">
+            📸 Instagram: @NE_7U
+        </a>
+    </div>
+
     <footer>
         All Rights Reserved &copy; Saif Ali
     </footer>
@@ -456,10 +490,8 @@ quizData.forEach((item, qIndex) => {
                 allOptions[item.c].classList.add('correct');
             }
             
-            // تحديث النتيجة التلقائية من 200
             liveScoreElement.innerText = correctAnswersCount;
             
-            // تأثير بصري خفيف على لوحة النتيجة عند الإجابة
             scoreContainer.classList.add('highlight');
             setTimeout(() => scoreContainer.classList.remove('highlight'), 300);
         });
