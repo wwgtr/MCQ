@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Business & Administrative English Quiz</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #16a085;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            direction: ltr;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .quiz-info {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .suggestions-box {
+            background-color: #e8f8f5;
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .suggestions-box h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+        .suggestions-box ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        .suggestions-box li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .question-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: 1px solid #e1e8ed;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-item {
+            padding: 12px 15px;
+            background: #f1f2f6;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .option-item:hover {
+            background: #e4e7eb;
+        }
+        .option-item.correct {
+            background-color: #d4edda !important;
+            border-color: var(--success-color) !important;
+            color: #155724 !important;
+            font-weight: bold;
+        }
+        .option-item.incorrect {
+            background-color: #f8d7da !important;
+            border-color: var(--error-color) !important;
+            color: #721c24 !important;
+        }
+        .disabled {
+            pointer-events: none;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid #e1e8ed;
+            color: #7f8c8d;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Basic Business & Administrative English Quiz</h1>
+    <div class="subtitle">College of Administration & Economics</div>
+    
+    <div class="quiz-info">Total Questions: 200 | Covered: Lecture 1 & Lecture 2</div>
+    
+    <div class="suggestions-box">
+        <h3>💡 Study Suggestions & Exam Tips</h3>
+        <ul>
+            <li><strong>Vocabulary Upgrades:</strong> Focus heavily on transforming informal words into formal alternatives (e.g., <em>want → request</em>, <em>tell → inform</em>, <em>get → obtain</em>) as these are highly expected in administrative settings.</li>
+            <li><strong>Preposition Precision:</strong> Remember key combinations like <em>"responsible for"</em>, <em>"in charge of"</em>, and <em>"report to"</em>. They are standard parts of workplace expressions.</li>
+            <li><strong>Email Layout:</strong> Keep paragraphs short (2-3 sentences) for optimal digital readability, and never omit the concise 4-part structure (Subject, Greeting, Body, Closing).</li>
+            <li><strong>Financial Formulas:</strong> Keep the basic conditions in mind: <strong>Profit</strong> requires Income > Expenses, while <strong>Loss</strong> occurs when Expenses > Income.</li>
+        </ul>
+    </div>
+    
+    <div id="quiz-container"></div>
+    
+    <footer>
+        All Rights Reserved &copy; Saif Ali
+    </footer>
+</div>
+
+<script>
+const quizData = [
+    // --- PART 1: MCQs (1 to 55) ---
+    { q: "1. What is the main focus of Basic Business & Administrative English?", a: ["Complex Grammar rules", "Practical Workplace English", "English Literature", "Poetry and essays"], c: 1 },
+    { q: "2. Which job role is defined as the person who 'controls and supervises work'?", a: ["Accountant", "Clerk", "Manager", "HR"], c: 2 },
+    { q: "3. Who is responsible for handling the company's money and preparing financial reports?", a: ["Clerk", "Accountant", "HR Manager", "Salesperson"], c: 1 },
+    { q: "4. What does the acronym 'HR' stand for in business administration?", a: ["Human Resources", "High Returns", "Human Relations", "Higher Ranks"], c: 0 },
+    { q: "5. Which department manages employee hiring and staff relations?", a: ["Finance", "HR", "Accounting", "Marketing"], c: 1 },
+    { q: "6. The department that manages budgets and company money is:", a: ["HR", "Clerk office", "Finance", "Production"], c: 2 },
+    { q: "7. What is the primary role of a 'Clerk' in an office setting?", a: ["Managing company budgets", "Hiring new staff", "Filing documents and doing general office work", "Supervising the manager"], c: 2 },
+    { q: "8. What is the definition of 'Market' in basic economic terms?", a: ["The money gained from selling", "A place of buying and selling", "The need for products", "The amount of available products"], c: 1 },
+    { q: "9. In economics, 'Supply' refers to:", a: ["The need for products", "The amount of products available", "The price of a product", "The money lost in business"], c: 1 },
+    { q: "10. What is 'Demand'?", a: ["The money gained from a shop", "The amount of products provided", "The need for products by customers", "The quality of a physical item"], c: 2 },
+    { q: "11. Profit is earned when:", a: ["Expenses are greater than Income", "Income is greater than Expenses", "Income equals Expenses", "No products are sold"], c: 1 },
+    { q: "12. A 'Loss' happens in business when:", a: ["Income > Expenses", "Expenses > Income", "Supply > Demand", "Customers buy more products"], c: 1 },
+    { q: "13. What is the primary goal of all companies?", a: ["To experience loss", "To avoid hiring staff", "To make a profit", "To write informal emails"], c: 2 },
+    { q: "14. Complete the expression: 'She is ______ charge of the finance department.'", a: ["at", "in", "on", "for"], c: 1 },
+    { q: "15. Complete the expression: 'The accountant is responsible ______ financial reports.'", a: ["to", "with", "for", "about"], c: 2 },
+    { q: "16. Complete the expression: 'Employees report ______ the manager.'", a: ["to", "for", "at", "with"], c: 0 },
+    { q: "17. Which of the following is a physical thing you can touch?", a: ["Service", "Product", "Expression", "Register"], c: 1 },
+    { q: "18. Which of the following is considered a 'Service'?", a: ["Phone", "Car", "Haircut", "Book"], c: 2 },
+    { q: "19. 'Work that someone does for you' is the definition of:", a: ["Product", "Service", "Supply", "Demand"], c: 1 },
+    { q: "20. Which of these is an example of a 'Product'?", a: ["Banking", "Taxi Ride", "Food", "Education"], c: 2 },
+    { q: "21. What is the definition of 'Buy'?", a: ["To give something for money", "To get something by paying money", "To file a business report", "To supervise office employees"], c: 1 },
+    { q: "22. 'To give something for money' is the definition of:", a: ["Buy", "Sell", "Price", "Quality"], c: 1 },
+    { q: "23. Who is a 'Customer'?", a: ["The person who supervises work", "The person who buys something", "The person who sells something", "The person who files documents"], c: 1 },
+    { q: "24. Who is a 'Seller'?", a: ["The person who handles the budget", "The person who provides work for free", "The person who sells something", "The person who buys goods"], c: 2 },
+    { q: "25. What does 'Quality' mean?", a: ["How much something costs", "How good or bad something is", "The location of buying and selling", "A type of durable good"], c: 1 },
+    { q: "26. 'Price' is defined as:", a: ["How good a product is", "How much something costs", "The amount of available goods", "Professional communication"], c: 1 },
+    { q: "27. Which of the following is a 'Consumer Product' used for daily life?", a: ["Office Furniture", "Refrigerator", "Soap", "Heavy Machine"], c: 2 },
+    { q: "28. Which of these is classified as a 'Durable Good'?", a: ["Milk", "Bread", "TV", "Soap"], c: 2 },
+    { q: "29. What are 'Business Products' used for?", a: ["Daily personal consumption", "Used by companies to operate and create other products", "Given away for free to customers", "Personal entertainment only"], c: 1 },
+    { q: "30. Which of the following is an example of a 'Business Product' (Equipment & Tools)?", a: ["Chocolate", "Computer used in an office", "Loaf of bread", "Haircut service"], c: 1 },
+    { q: "31. A service provided for individuals and daily life (like a Gym or Hair Salon) is a:", a: ["Business Service", "Professional Service", "Personal Service", "Administrative Service"], c: 2 },
+    { q: "32. Services that require special training and expertise (like a Doctor or Lawyer) are:", a: ["Personal Services", "Professional Services", "Consumer Services", "Durable Services"], c: 1 },
+    { q: "33. Banking, cleaning, and delivery services that support companies are classified as:", a: ["Personal Services", "Business Services", "Informal Services", "Retail Products"], c: 1 },
+    { q: "34. Which customer phrase is used when asking about price?", a: ["It has good quality.", "I'll take this one.", "How much is this?", "Do you have a cheaper one?"], c: 2 },
+    { q: "35. Which phrase indicates making a purchase?", a: ["What's the price?", "I'll buy it.", "It's $200.", "Please come again!"], c: 1 },
+    { q: "36. Which of the following is a sign of GOOD customer service?", a: ["Rude behavior", "Slow service", "Friendly smile and helpful answers", "Ignoring the customer"], c: 2 },
+    { q: "37. 'Staff look angry or bored' is an example of:", a: ["Good Customer Service", "Professional Service", "Bad Customer Service", "Administrative Writing"], c: 2 },
+    { q: "38. What is 'Register' in English communication?", a: ["A table of economic terms", "Choosing our English style depending on the situation and the reader", "Sending an email to a friend", "Filling out a job application form"], c: 1 },
+    { q: "39. Formal English is used with:", a: ["Friends and family", "Close colleagues during lunch", "Offices, institutions, universities, and business", "Text messages and social media"], c: 2 },
+    { q: "40. What is the typical tone of Informal English?", a: ["Polite, respectful, indirect", "Casual, relaxed, conversational", "Academic and serious", "Rigid and institutional"], c: 1 },
+    { q: "41. Which medium is appropriate for Formal English?", a: ["Chat platforms", "Written documents, professional emails, and reports", "Text messages to family", "Casual spoken conversation"], c: 1 },
+    { q: "42. What is the formal alternative for the informal word 'Hi'?", a: ["Thanks", "Dear Sir/Madam", "Clear structure", "Yours sincerely"], c: 1 },
+    { q: "43. Instead of using the informal phrase 'I want', you should write: ", a: ["Send me", "I would like / Request", "Give me", "Get"], c: 1 },
+    { q: "44. Upgrade the informal word 'Tell' to formal business English:", a: ["Obtain", "Inform", "Assist", "Request"], c: 1 },
+    { q: "45. Change 'Thanks' to its proper formal academic/business equivalent:", a: ["Hi", "Thank you", "Help", "Regards"], c: 1 },
+    { q: "46. What is the formal word for 'Help'?", a: ["Assist", "Obtain", "Ask for", "Inform"], c: 0 },
+    { q: "47. What is the formal word for 'Get'?", a: ["Tell", "Obtain", "Provide", "Send"], c: 1 },
+    { q: "48. Instead of writing 'Send me' in a formal administrative email, you should write:", a: ["I want", "Please provide", "Ask for", "Hi"], c: 1 },
+    { q: "49. Why is an email starting with 'Hi' and ending with 'Thanks' considered a failure in administrative communication?", a: ["It has short paragraphs", "It is too casual and lacks institutional protocol", "It has a clear subject line", "It uses the word 'Request'"], c: 1 },
+    { q: "50. What are the 4 essential components of a formal email structure?", a: ["Subject, Greeting, Body, Closing", "Title, Picture, Body, Signature", "Greeting, Name, Date, File", "Subject, Text, Link, Thanks"], c: 0 },
+    { q: "51. The 'Subject Line' in a formal email should be:", a: ["Long and descriptive", "Clear, concise summary of the email's purpose", "Left empty", "Informal and casual"], c: 1 },
+    { q: "52. Which of the following is an appropriate formal closing phrase?", a: ["Bye", "Yours sincerely", "Thanks", "See you later"], c: 1 },
+    { q: "53. According to the 'Pro Tip' in Lecture 2, how long should email paragraphs be for better readability on screens?", a: ["5-10 sentences", "2-3 sentences", "Exactly one word", "One very long paragraph"], c: 1 },
+    { q: "54. What should you always do before hitting 'send' on an official email?", a: ["Delete the subject line", "Change the tone to informal", "Proofread for spelling, grammar, and tone", "Add emojis"], c: 2 },
+    { q: "55. According to Lecture 2, 'Your words reflect your _________.'", a: ["Profit", "Professionalism", "Demand", "Register"], c: 1 },
+
+    // --- PART 2: Transformed Fill-in-the-Blanks (56 to 95) ---
+    { q: "56. English is considered the global language of __________.", a: ["literature", "business", "history", "poetry"], c: 1 },
+    { q: "57. A __________ controls and supervises work within an organization.", a: ["clerk", "accountant", "manager", "intern"], c: 2 },
+    { q: "58. The __________ department handles employee recruitment, hiring, and management.", a: ["Finance", "Accounting", "HR (Human Resources)", "Sales"], c: 2 },
+    { q: "59. The __________ department is responsible for managing company budgets and money.", a: ["HR", "Marketing", "Finance", "Legal"], c: 2 },
+    { q: "60. An office worker who files documents and handles general administration is called a __________.", a: ["manager", "clerk", "director", "accountant"], c: 1 },
+    { q: "61. In economics, a __________ is defined as a place where buying and selling take place.", a: ["factory", "market", "office", "warehouse"], c: 1 },
+    { q: "62. __________ represents the amount of products available for sale in the market.", a: ["Demand", "Supply", "Profit", "Loss"], c: 1 },
+    { q: "63. __________ represents the customer's need for specific products.", a: ["Supply", "Quality", "Demand", "Price"], c: 2 },
+    { q: "64. Business profit occurs when __________ is greater than expenses.", a: ["loss", "debt", "income", "tax"], c: 2 },
+    { q: "65. A business experiences a __________ when expenses are greater than income.", a: ["profit", "gain", "loss", "surplus"], c: 2 },
+    { q: "66. Every company aims to make a profit and avoid __________.", a: ["income", "growth", "loss", "investment"], c: 2 },
+    { q: "67. Complete the expression: I am responsible __________ customer service.", a: ["to", "with", "for", "at"], c: 2 },
+    { q: "68. Complete the expression: She is __________ charge of the finance department.", a: ["at", "in", "on", "by"], c: 1 },
+    { q: "69. Complete the expression: I report __________ the manager.", a: ["to", "for", "with", "under"], c: 0 },
+    { q: "70. A __________ is a physical thing that you can touch and see.", a: ["service", "product", "register", "expression"], c: 1 },
+    { q: "71. A __________ is work that someone does for you in exchange for money.", a: ["product", "asset", "service", "good"], c: 2 },
+    { q: "72. To get something by paying money is to __________.", a: ["sell", "buy", "trade", "rent"], c: 1 },
+    { q: "73. To give something in exchange for money is to __________.", a: ["buy", "borrow", "sell", "produce"], c: 2 },
+    { q: "74. The person who buys something is known as the __________.", a: ["seller", "manager", "customer", "clerk"], c: 2 },
+    { q: "75. The person who sells something is known as the __________.", a: ["customer", "buyer", "seller", "accountant"], c: 2 },
+    { q: "76. __________ refers to how good or bad a product or service is.", a: ["Price", "Supply", "Quality", "Demand"], c: 2 },
+    { q: "77. __________ refers to how much a product or service costs.", a: ["Quality", "Price", "Value", "Profit"], c: 1 },
+    { q: "78. Milk, bread, and soap are examples of consumer products meant for __________ use.", a: ["durable", "daily", "business", "annual"], c: 1 },
+    { q: "79. A TV and a refrigerator are classified as __________ goods because they last a long time.", a: ["perishable", "daily", "durable", "temporary"], c: 2 },
+    { q: "80. Equipment, tools, and office furniture used by companies to operate are called __________ products.", a: ["personal", "consumer", "business", "free"], c: 2 },
+    { q: "81. Services provided for individuals and daily life are called __________ services.", a: ["business", "professional", "personal", "corporate"], c: 2 },
+    { q: "82. Services that require special training and expertise, like a doctor or lawyer, are called __________ services.", a: ["personal", "casual", "professional", "basic"], c: 2 },
+    { q: "83. Friendly smile and quick service are characteristics of __________ customer service.", a: ["bad", "slow", "good", "rude"], c: 2 },
+    { q: "84. Rude behavior and ignoring customers are signs of __________ customer service.", a: ["good", "professional", "bad", "satisfactory"], c: 2 },
+    { q: "85. We choose our English style depending on the situation and the reader; this concept is called __________.", a: ["vocabulary", "register", "grammar", "translation"], c: 1 },
+    { q: "86. Informal English is used with friends, family, and close __________.", a: ["managers", "directors", "colleagues", "institutions"], c: 2 },
+    { q: "87. Formal English is used in offices, institutions, corporations, and __________.", a: ["chat rooms", "universities", "casual parties", "family homes"], c: 1 },
+    { q: "88. The tone of formal English should always be polite, professional, and __________.", a: ["casual", "demanding", "respectful", "relaxed"], c: 2 },
+    { q: "89. The formal upgrade for the informal phrase 'want' is __________.", a: ["get", "request / would like", "send", "tell"], c: 1 },
+    { q: "90. The formal alternative for the word 'tell' is __________.", a: ["obtain", "inform", "assist", "request"], c: 1 },
+    { q: "91. The formal alternative for the word 'help' is __________.", a: ["assist", "obtain", "inform", "provide"], c: 0 },
+    { q: "92. The formal alternative for the word 'get' is __________.", a: ["provide", "send", "obtain", "request"], c: 2 },
+    { q: "93. Instead of writing the casual 'Send me', a professional should write 'Please __________'.", a: ["want", "provide", "get", "tell"], c: 1 },
+    { q: "94. Every formal email must begin with a clear and concise __________ line that highlights its purpose.", a: ["closing", "body", "subject", "signature"], c: 2 },
+    { q: "95. In official business communication, 'Dear Sir/Madam' is a proper formal __________.", a: ["closing", "greeting", "body", "subject"], c: 1 },
+
+    // --- PART 3: True / False (106 to 205) ---
+    { q: "106. Practical workplace English focuses on business communication rather than literature or complex grammar.", a: ["True", "False"], c: 0 },
+    { q: "107. The College of Administration & Economics design their lectures to last for 90 minutes.", a: ["True", "False"], c: 0 },
+    { q: "108. Students of administration and economics do not need English for their future jobs.", a: ["True", "False"], c: 1 },
+    { q: "109. English is recognized globally as the global language of business.", a: ["True", "False"], c: 0 },
+    { q: "110. In professional organizations, English is commonly used for writing emails, holding meetings, and preparing reports.", a: ["True", "False"], c: 0 },
+    { q: "111. International companies rarely require their employees to use the English language.", a: ["True", "False"], c: 1 },
+    { q: "112. A manager is defined as an office worker who handles general administrative tasks.", a: ["True", "False"], c: 1 },
+    { q: "113. An accountant is the professional role responsible for handling company money.", a: ["True", "False"], c: 0 },
+    { q: "114. The primary responsibility of Human Resources (HR) is managing the company employees.", a: ["True", "False"], c: 0 },
+    { q: "115. The Finance department is strictly responsible for hiring new staff members.", a: ["True", "False"], c: 1 },
+    { q: "116. A clerk is an office worker whose responsibilities include filing documents.", a: ["True", "False"], c: 0 },
+    { q: "117. In a workplace context, the manager is the person who supervises employees.", a: ["True", "False"], c: 0 },
+    { q: "118. Preparing financial reports is a core task performed by an accountant.", a: ["True", "False"], c: 0 },
+    { q: "119. The HR department is responsible for controlling the company's financial budget.", a: ["True", "False"], c: 1 },
+    { q: "120. In basic economic terms, a market is defined as a place of buying and selling.", a: ["True", "False"], c: 0 },
+    { q: "121. Supply refers to the customer's need for specific products in the market.", a: ["True", "False"], c: 1 },
+    { q: "122. Demand is defined as the amount of products available in the market.", a: ["True", "False"], c: 1 },
+    { q: "123. Profit is defined as the money gained from business operations.", a: ["True", "False"], c: 0 },
+    { q: "124. Loss is defined as the money gained when income is greater than expenses.", a: ["True", "False"], c: 1 },
+    { q: "125. Profit occurs when business income is greater than business expenses (INCOME > EXPENSES).", a: ["True", "False"], c: 0 },
+    { q: "126. Making a profit is the ultimate goal of all business companies.", a: ["True", "False"], c: 0 },
+    { q: "127. A business loss occurs when business expenses are greater than business income (EXPENSES > INCOME).", a: ["True", "False"], c: 0 },
+    { q: "128. A business loss is an operational result that companies actively try to achieve.", a: ["True", "False"], c: 1 },
+    { q: "129. If a retail shop spends more money than it sells, it results in a financial profit.", a: ["True", "False"], c: 1 },
+    { q: "130. If a retail shop sells more goods than it spends, it achieves a financial profit.", a: ["True", "False"], c: 0 },
+    { q: "131. Every company aims to make profit and avoid loss in its daily operations.", a: ["True", "False"], c: 0 },
+    { q: "132. The common expression 'responsible for' means having control or authority over a department.", a: ["True", "False"], c: 1 },
+    { q: "133. The expression 'in charge of' means having control or authority over a department or project.", a: ["True", "False"], c: 0 },
+    { q: "134. 'I am responsible for customer service' is a correct usage of the workplace expression.", a: ["True", "False"], c: 0 },
+    { q: "135. 'She is in charge of the finance department' is a correct usage of the workplace expression.", a: ["True", "False"], c: 0 },
+    { q: "136. The workplace expression 'report to' means to be accountable to a professional superior.", a: ["True", "False"], c: 0 },
+    { q: "137. 'I report to the manager' means that the manager is accountable to me.", a: ["True", "False"], c: 1 },
+    { q: "138. Mastering workplace expressions enables accurate articulation of roles, responsibilities, and reporting relationships.", a: ["True", "False"], c: 0 },
+    { q: "139. In the practice section, the correct preposition to follow 'responsible' is 'for'.", a: ["True", "False"], c: 0 },
+    { q: "140. In the practice section, the correct preposition to follow 'report' is 'to'.", a: ["True", "False"], c: 0 },
+    { q: "141. The first-year students of the Department of Management & Economics study products and services.", a: ["True", "False"], c: 0 },
+    { q: "142. A product is defined in business as a physical thing you can touch.", a: ["True", "False"], c: 0 },
+    { q: "143. A service is defined in business as a physical object that you can buy and keep.", a: ["True", "False"], c: 1 },
+    { q: "144. According to the textbook, a phone and a car are examples of business services.", a: ["True", "False"], c: 1 },
+    { q: "145. A haircut and banking are classified as examples of business products.", a: ["True", "False"], c: 1 },
+    { q: "146. In business, companies sell products and services directly to customers.", a: ["True", "False"], c: 0 },
+    { q: "147. Education and a taxi ride are explicitly listed as examples of services.", a: ["True", "False"], c: 0 },
+    { q: "148. A book and food are classified as examples of physical products.", a: ["True", "False"], c: 0 },
+    { q: "149. To 'buy' means to give something to another person for money.", a: ["True", "False"], c: 1 },
+    { q: "150. To 'sell' means to give something to another person for money.", a: ["True", "False"], c: 0 },
+    { q: "151. 'I buy coffee every morning' is a correct context sentence for the word 'buy'.", a: ["True", "False"], c: 0 },
+    { q: "152. 'The shop sells phones' is a correct context sentence for the word 'sell'.", a: ["True", "False"], c: 0 },
+    { q: "153. A customer is defined as the person who sells something to a company.", a: ["True", "False"], c: 1 },
+    { q: "154. A seller is defined as the person who sells something to a customer.", a: ["True", "False"], c: 0 },
+    { q: "155. Quality is defined as how much a specific product costs in the market.", a: ["True", "False"], c: 1 },
+    { q: "156. Price is defined as how much a specific product or service costs.", a: ["True", "False"], c: 0 },
+    { q: "157. 'This phone has good quality' is an example of talking about a product's price.", a: ["True", "False"], c: 1 },
+    { q: "158. Customer service is defined as providing help for customers.", a: ["True", "False"], c: 0 },
+    { q: "159. Good customer service directly makes customers unhappy with the company.", a: ["True", "False"], c: 1 },
+    { q: "160. A price of $5 is classified in the lecture examples as a high price.", a: ["True", "False"], c: 1 },
+    { q: "161. A price of $500 is classified in the lecture examples as a high price.", a: ["True", "False"], c: 0 },
+    { q: "162. Consumer products include goods meant for daily use and durable goods.", a: ["True", "False"], c: 0 },
+    { q: "163. Milk, bread, and soap are classified as durable goods under consumer products.", a: ["True", "False"], c: 1 },
+    { q: "164. A TV and a refrigerator are examples of durable goods under consumer products.", a: ["True", "False"], c: 0 },
+    { q: "165. Business products are used by individual consumers for daily home life.", a: ["True", "False"], c: 1 },
+    { q: "166. Machines and computers are classified as equipment and tools under business products.", a: ["True", "False"], c: 0 },
+    { q: "167. Office furniture is classified as part of office and infrastructure under business products.", a: ["True", "False"], c: 0 },
+    { q: "168. Personal services are services designed specifically to support companies and organizations.", a: ["True", "False"], c: 1 },
+    { q: "169. A hair salon, a gym, and a restaurant are examples of personal services.", a: ["True", "False"], c: 0 },
+    { q: "170. Business services include functions like banking, cleaning, and delivery to support companies.", a: ["True", "False"], c: 0 },
+    { q: "171. Professional services require special training and professional expertise.", a: ["True", "False"], c: 0 },
+    { q: "172. A doctor, a teacher, and a lawyer are classified as examples of professional services.", a: ["True", "False"], c: 0 },
+    { q: "173. The questions 'How much is this?' and 'What's the price?' are used for asking about quality.", a: ["True", "False"], c: 1 },
+    { q: "174. The phrases 'It has good quality' and 'This one is better' are used when talking about quality.", a: ["True", "False"], c: 0 },
+    { q: "175. The phrases 'I'll buy it' and 'I'll take this one' are used when making a purchase.", a: ["True", "False"], c: 0 },
+    { q: "176. Having a friendly smile means that staff are welcoming and happy to help.", a: ["True", "False"], c: 0 },
+    { q: "177. Clear information that helps a customer decide is the definition of quick service.", a: ["True", "False"], c: 1 },
+    { q: "178. Quick service means that the customer does not have to wait too long.", a: ["True", "False"], c: 0 },
+    { q: "179. Showing appreciation for a customer's business involves saying 'Thank You'.", a: ["True", "False"], c: 0 },
+    { q: "180. Rude behavior in customer service means staff are impolite or disrespectful.", a: ["True", "False"], c: 0 },
+    { q: "181. Slow service means that a customer waits a very short time to get help.", a: ["True", "False"], c: 1 },
+    { q: "182. 'No Help' is defined as staff ignoring the customer or refusing to assist them.", a: ["True", "False"], c: 0 },
+    { q: "183. An 'Unhappy Face' means that the workplace staff look angry or bored.", a: ["True", "False"], c: 0 },
+    { q: "184. Lecture 2 focuses on teaching formal emails and administrative writing.", a: ["True", "False"], c: 0 },
+    { q: "185. Developing professional communication skills is required for academic correspondence and business interactions.", a: ["True", "False"], c: 0 },
+    { q: "186. Students do not need to distinguish between formal and informal English in professional contexts.", a: ["True", "False"], c: 1 },
+    { q: "187. Register refers to choosing our English depending on the situation and the reader.", a: ["True", "False"], c: 0 },
+    { q: "188. Informal English is appropriate to use with offices, institutions, and universities.", a: ["True", "False"], c: 1 },
+    { q: "189. Informal English is typically used with friends, family, and close colleagues.", a: ["True", "False"], c: 0 },
+    { q: "190. Text messages, spoken language, and chat platforms are common mediums for formal English.", a: ["True", "False"], c: 1 },
+    { q: "191. The tone of informal English is described as casual, relaxed, conversational, and direct.", a: ["True", "False"], c: 0 },
+    { q: "192. The tone of formal English is characterized as polite, professional, respectful, and indirect.", a: ["True", "False"], c: 0 },
+    { q: "193. Context does not determine your communication style in business.", a: ["True", "False"], c: 1 },
+    { q: "194. Using formal vocabulary demonstrates respect for your reader and makes writing more professional.", a: ["True", "False"], c: 0 },
+    { q: "195. Universities and colleges accept informal text language in all official correspondence.", a: ["True", "False"], c: 1 },
+    { q: "196. The informal word 'Hi' can be upgraded to the formal greeting 'Dear Sir/Madam'.", a: ["True", "False"], c: 0 },
+    { q: "197. 'I want' is a formal phrase that should be used frequently in administrative writing.", a: ["True", "False"], c: 1 },
+    { q: "198. The formal business equivalent of the informal verb 'Tell' is 'Inform'.", a: ["True", "False"], c: 0 },
+    { q: "199. 'Assist' is the professional, formal upgrade for the common word 'Help'.", a: ["True", "False"], c: 0 },
+    { q: "200. The informal verb 'Get' can be upgraded to the formal word 'Obtain' in reports.", a: ["True", "False"], c: 0 },
+    { q: "201. 'Please provide' is a polite, formal upgrade for the direct instruction 'Send me'.", a: ["True", "False"], c: 0 },
+    { q: "202. The email passage that starts with 'Hi' and uses 'I want to know' is highly appropriate for administration.", a: ["True", "False"], c: 1 },
+    { q: "203. The phrase 'I want' in a business request sounds demanding rather than requesting.", a: ["True", "False"], c: 0 },
+    { q: "204. In professional email standards, the closing word 'Thanks' is considered completely sufficient for formal correspondence.", a: ["True", "False"], c: 1 },
+    { q: "205. An email that lacks a subject line and proper closing can be perceived as unprofessional by the reader.", a: ["True", "False"], c: 0 }
+];
+
+const container = document.getElementById('quiz-container');
+
+quizData.forEach((item, qIndex) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    
+    const qText = document.createElement('div');
+    qText.className = 'question-text';
+    qText.innerText = item.q;
+    card.appendChild(qText);
+    
+    const optionsList = document.createElement('ul');
+    optionsList.className = 'options-list';
+    
+    item.a.forEach((option, oIndex) => {
+        const optionItem = document.createElement('li');
+        optionItem.className = 'option-item';
+        optionItem.innerText = option;
+        
+        optionItem.addEventListener('click', () => {
+            const allOptions = optionsList.querySelectorAll('.option-item');
+            allOptions.forEach(opt => opt.classList.add('disabled'));
+            
+            if (oIndex === item.c) {
+                optionItem.classList.add('correct');
+            } else {
+                optionItem.classList.add('incorrect');
+                allOptions[item.c].classList.add('correct');
+            }
+        });
+        
+        optionsList.appendChild(optionItem);
+    });
+    
+    card.appendChild(optionsList);
+    container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
