@@ -31,7 +31,7 @@
             z-index: 1;
         }
 
-        /* تأثير زجاج الآيفون الفاخر */
+        /* تأثير زجاج الآيفون الفاخر كلاسيفاي */
         .glass-card {
             position: relative;
             z-index: 10;
@@ -53,7 +53,6 @@
             overflow: hidden;
         }
 
-        /* خط اللمعان المتحرك على الزجاج */
         .glass-card::before {
             content: '';
             position: absolute;
@@ -103,7 +102,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* زر بااااي النيون */
         .close-btn {
             background: linear-gradient(135deg, #ec4899, #8b5cf6);
             color: #ffffff;
@@ -124,10 +122,6 @@
             transform: scale(1.04) translateY(-3px);
             box-shadow: 0 20px 40px rgba(236, 72, 153, 0.55), 
                         0 0 20px rgba(139, 92, 246, 0.4);
-        }
-
-        .close-btn:active {
-            transform: scale(0.97);
         }
 
         .social-container {
@@ -154,19 +148,11 @@
             transform: translateY(-4px);
         }
 
-        .social-link.insta:hover {
-            border-color: #ec4899;
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.25);
-        }
-
-        .social-link.tele:hover {
-            border-color: #38bdf8;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
-        }
+        .social-link.insta:hover { border-color: #ec4899; box-shadow: 0 10px 25px rgba(236, 72, 153, 0.25); }
+        .social-link.tele:hover { border-color: #38bdf8; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25); }
 
         @keyframes advancedCollapse {
             0% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
-            50% { transform: scale(1.1) rotate(2deg); opacity: 0.5; filter: blur(5px); }
             100% { transform: scale(0.5) rotate(-5deg); opacity: 0; filter: blur(40px); }
         }
 
@@ -174,37 +160,86 @@
             animation: advancedCollapse 0.7s forwards cubic-bezier(0.55, 0.085, 0.68, 0.53);
         }
 
-        .ios-toast {
+        /* حاوية التتر السينمائي المطور */
+        #movie-credits-wrapper {
+            display: none;
             position: absolute;
-            bottom: -100px;
-            background: rgba(10, 5, 22, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: #f8fafc;
-            padding: 16px 36px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: bottom 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 100;
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+            background: #020107;
+            overflow: hidden;
+            justify-content: center;
         }
 
-        .ios-toast.show {
-            bottom: 45px;
+        #credits-container {
+            position: absolute;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 2.4;
+            top: 100%;
+        }
+
+        .credit-title {
+            color: #ec4899;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 40px;
+            font-weight: 700;
+        }
+
+        .credit-name {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-shadow: 0 0 8px rgba(255,255,255,0.2);
+            margin-bottom: 5px;
+        }
+
+        .credit-name-en {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            letter-spacing: 1px;
+            color: #e2e8f0;
+            font-size: 1.15rem;
+        }
+
+        .final-thanks {
+            font-size: 2.2rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 100px;
+            margin-bottom: 250px;
+            background: linear-gradient(135deg, #ffffff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(139,92,246,0.6);
         }
     </style>
 </head>
 <body>
 
+    <!-- عنصر الصوت المطور المخفي لتشغيل ملف 1.ogg -->
+    <audio id="bg-music" src="1.ogg" loop preload="auto"></audio>
+
     <canvas id="bg-canvas"></canvas>
+
+    <div id="movie-credits-wrapper">
+        <div id="credits-container">
+            <!-- التوليد البرمجي هنا -->
+        </div>
+    </div>
 
     <div class="glass-card" id="main-card">
         <h1>سيف علي</h1>
         <p class="subtitle">خلصنا امتحان</p>
         
-        <button class="close-btn" onclick="closeAction()">
+        <button class="close-btn" onclick="startMovieCredits()">
             بااااي
         </button>
 
@@ -214,41 +249,38 @@
         </div>
     </div>
 
-    <!-- الإشعار السفلي المحدث بالعبارة الجديدة -->
-    <div class="ios-toast" id="toast">الحمد لله على كل شيء</div>
-
     <script>
+        // --- محرك الصوت الذكي لتخطي قيود المتصفحات وسفاري ---
+        const bgMusic = document.getElementById('bg-music');
+        
+        function tryPlayMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(err => {
+                    // تم منع التشغيل التلقائي مؤقتاً، سينتظر المتصفح أول لمسة أو حركة
+                    console.log("Waiting for user interaction to blast music...");
+                });
+            }
+        }
+
+        // تفعيل تشغيل الصوت تلقائياً بمجرد حدوث أي حركة لمس أو تفاعل على الشاشة
+        window.addEventListener('mousemove', tryPlayMusic, { once: true });
+        window.addEventListener('touchstart', tryPlayMusic, { once: true });
+        window.addEventListener('click', tryPlayMusic, { once: true });
+
+
+        // --- تأثير جزيئات الخلفية التفاعلية ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-
         let particlesArray = [];
         const numberOfParticles = 75;
+        const mouse = { x: null, y: null, radius: 160 };
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const mouse = {
-            x: null,
-            y: null,
-            radius: 160
-        }
-
-        function updateMouseCoords(x, y) {
-            mouse.x = x;
-            mouse.y = y;
-        }
-
-        window.addEventListener('mousemove', (e) => updateMouseCoords(e.x, e.y));
-        window.addEventListener('touchmove', (e) => {
-            if(e.touches.length > 0) {
-                updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        });
-
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('touchmove', (e) => { if(e.touches.length > 0) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } });
         window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
         window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
 
@@ -259,7 +291,6 @@
                 this.size = Math.random() * 3.5 + 1;
                 this.speedX = Math.random() * 1 - 0.5;
                 this.speedY = Math.random() * 1 - 0.5;
-                
                 let rand = Math.random();
                 if (rand < 0.4) this.color = 'rgba(236, 72, 153, 0.35)';
                 else if (rand < 0.7) this.color = 'rgba(139, 92, 246, 0.3)';
@@ -268,7 +299,6 @@
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-
                 if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
                 if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
 
@@ -277,13 +307,9 @@
                     let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
                     if (distance < mouse.radius) {
-                        let forceDirectionX = dx / distance;
-                        let forceDirectionY = dy / distance;
                         let force = (mouse.radius - distance) / mouse.radius;
-                        let directionX = forceDirectionX * force * 6;
-                        let directionY = forceDirectionY * force * 6;
-                        this.x -= directionX;
-                        this.y -= directionY;
+                        this.x -= (dx / distance) * force * 6;
+                        this.y -= (dy / distance) * force * 6;
                     }
                 }
             }
@@ -295,12 +321,7 @@
             }
         }
 
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
+        function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
 
         function connectParticles() {
             for (let a = 0; a < particlesArray.length; a++) {
@@ -308,7 +329,6 @@
                     let dx = particlesArray[a].x - particlesArray[b].x;
                     let dy = particlesArray[a].y - particlesArray[b].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
-
                     if (distance < 130) {
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(139, 92, 246, ${0.12 - (distance/130) * 0.12})`;
@@ -321,18 +341,14 @@
             }
         }
 
+        let bgAnimationId;
         function animate() {
             ctx.fillStyle = 'rgba(2, 1, 7, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
+            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); particlesArray[i].draw(); }
             connectParticles();
-            requestAnimationFrame(animate);
+            bgAnimationId = requestAnimationFrame(animate);
         }
-
         init();
         animate();
 
@@ -342,31 +358,74 @@
             let yAxis = (window.innerHeight / 2 - e.pageY) / 30;
             card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg) translateZ(30px)`;
         });
+        window.addEventListener('mouseleave', () => { card.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(30px)`; });
 
-        window.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(30px)`;
-        });
 
-        // الشاشة النهائية المعدلة بعبارة الحمد لله على كل شيء
-        function closeAction() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
+        // --- السيناريو السينمائي الجامعي القدير ---
+        const arabicStars = ["الفاينل", "المد", "كوزات", "تقارير", "بحوث", "مناقشات", "رسوب", "نجاح", "غياب", "اجايز", "غش", "مشاكل", "سوالف", "ضحك"];
+        const enRoles = ["Executive Producers", "Director of Photography", "Visual Effects Supervisors", "Production Designers", "Sound Engineers", "Stunt Coordinators", "Casting Directors", "Post-Production Crew"];
+        const enNames = [
+            "James Anderson", "Oliver Smith", "Liam Johnson", "Lucas Williams", "Benjamin Brown", 
+            "Mason Jones", "Ethan Garcia", "Alexander Miller", "Henry Davis", "Sebastian Rodriguez",
+            "Jack Martinez", "Samuel Hernandez", "Owen Lopez", "David Gonzalez", "Matthew Wilson",
+            "Joseph Anderson", "Jackson Thomas", "Emma Taylor", "Sophia Moore", "Mia Jackson",
+            "Charlotte Martin", "Amelia Lee", "Harper Perez", "Evelyn Thompson", "Abigail White",
+            "Emily Harris", "Elizabeth Sanchez", "Avery Clark", "Sofia Ramirez", "Ella Lewis",
+            "Madison Robinson", "Scarlett Walker", "Victoria Young", "Aria Allen", "Grace King"
+        ];
+
+        function generateCredits() {
+            const container = document.getElementById('credits-container');
+            let html = `<div style="font-size: 2.5rem; font-weight: 800; color: #ffffff; margin-bottom: 60px; letter-spacing: 3px;">نـهـايـة الامـتـحـانـات</div>`;
+            
+            html += `<div class="credit-title">بطولة</div>`;
+            arabicStars.forEach(star => { html += `<div class="credit-name">${star}</div>`; });
+
+            let nameIndex = 0;
+            for (let i = 0; i < 75; i++) {
+                if (i % 8 === 0) {
+                    let role = enRoles[Math.floor(i / 8) % enRoles.length];
+                    html += `<div class="credit-title">${role}</div>`;
+                }
+                let name1 = enNames[nameIndex % enNames.length];
+                let name2 = enNames[(nameIndex + 4) % enNames.length].split(' ')[1];
+                html += `<div class="credit-name credit-name-en">${name1.split(' ')[0]} ${name2}</div>`;
+                nameIndex++;
+            }
+
+            html += `<div class="final-thanks">الحمد لله على كل شيء</div>`;
+            container.innerHTML = html;
+        }
+
+        function startMovieCredits() {
+            // للتأكيد في حال لم تعمل الموسيقى مسبقاً، ستعمل إجبارياً وبأعلى صوت عند ضغط الزر
+            bgMusic.play(); 
 
             card.classList.add('explode');
-            
-            particlesArray.forEach(p => {
-                p.speedX *= 12;
-                p.speedY *= 12;
-            });
+            generateCredits();
 
             setTimeout(() => {
-                document.body.innerHTML = `
-                    <div style="color: #ffffff; font-size: 1.4rem; text-align: center; font-weight: 500; letter-spacing: 1px; text-shadow: 0 0 15px rgba(236,72,153,0.6); font-family: sans-serif;">
-                        الحمد لله على كل شيء
-                    </div>
-                `;
-                document.body.style.background = '#020107';
-            }, 700);
+                card.style.display = 'none';
+                cancelAnimationFrame(bgAnimationId);
+                canvas.style.display = 'none';
+
+                const wrapper = document.getElementById('movie-credits-wrapper');
+                const container = document.getElementById('credits-container');
+                wrapper.style.display = 'flex';
+
+                let currentTop = window.innerHeight;
+                
+                function scrollCredits() {
+                    currentTop -= 1.0; 
+                    container.style.top = currentTop + 'px';
+
+                    if (currentTop > -container.offsetHeight) {
+                        requestAnimationFrame(scrollCredits);
+                    }
+                }
+                requestAnimationFrame(scrollCredits);
+
+            }, 600);
         }
     </script>
 </body>
