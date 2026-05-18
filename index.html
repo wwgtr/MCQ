@@ -2,42 +2,27 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>سيف علي | Saif Ali</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سيف علي</title>
     <style>
-        :root {
-            --bg-dark: #030307;
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.07);
-            --glass-blur: blur(30px);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.45);
-            --neon-purple: #a855f7;
-            --neon-blue: #3b82f6;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
-            min-height: 100vh;
+            background: radial-gradient(circle at 50% 50%, #1e1135 0%, #0b0518 70%, #020107 100%);
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
-        /* قماش الخلفية للشبكة التفاعلية والأورورا السائلة */
-        #interactive-canvas {
+        #bg-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -46,445 +31,343 @@
             z-index: 1;
         }
 
-        /* كرت الزجاج الرئيسي الفخم الفوق متطور */
+        /* تأثير زجاج الآيفون الفاخر */
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 40px 28px;
-            width: 100%;
-            max-width: 385px;
-            text-align: center;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 
-                        inset 0 1px 2px rgba(255, 255, 255, 0.15);
-            z-index: 2;
-            transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* لوحة الهاكر المشوشة الأنيقة والمطورة بحدود متوهجة */
-        .glitch-code-box {
-            font-family: "Courier New", Courier, monospace;
-            background: rgba(0, 0, 0, 0.55);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            padding: 16px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.15), 
-                        0 4px 20px rgba(0, 0, 0, 0.4);
             position: relative;
+            z-index: 10;
+            background: rgba(18, 10, 36, 0.35);
+            backdrop-filter: blur(40px) saturate(220%);
+            -webkit-backdrop-filter: blur(40px) saturate(220%);
+            border: 1px solid rgba(236, 72, 153, 0.15);
+            border-radius: 28px;
+            padding: 55px 45px;
+            text-align: center;
+            width: 90%;
+            max-width: 430px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                        inset 0 -1px 20px rgba(168, 85, 247, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(30px);
+            transition: border-color 0.5s ease, box-shadow 0.5s ease;
+            overflow: hidden;
         }
 
-        .code-header {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 12px;
-            justify-content: flex-start;
+        /* خط اللمعان المتحرك على الزجاج */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 30%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.12) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: lightGlow 6s infinite linear;
+            pointer-events: none;
         }
 
-        .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
+        @keyframes lightGlow {
+            0% { left: -60%; }
+            100% { left: 140%; }
         }
-        .dot.purple { background: var(--neon-purple); }
-        .dot.blue { background: var(--neon-blue); }
 
-        /* النص الرئيسي المشوش المتوهج */
-        .glitch-text {
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 50px 120px rgba(168, 85, 247, 0.25),
+                        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
             color: #ffffff;
-            font-size: 1.65rem;
+            font-size: 2.6rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 12px rgba(168, 85, 247, 0.65), 0 0 25px rgba(59, 130, 246, 0.3);
-            min-height: 38px;
-        }
-
-        .title {
-            color: var(--text-primary);
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #f472b6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* تأثير التشفير الاحترافي لوصف مطور تطبيقات */
-        .cyber-subtitle {
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--neon-purple);
-            font-size: 0.95rem;
+        .subtitle {
+            color: #a78bfa;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        /* زر بااااي النيون */
+        .close-btn {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: #ffffff;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(236, 72, 153, 0.35);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            margin-bottom: 35px;
             letter-spacing: 1px;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.04) translateY(-3px);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.55), 
+                        0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .close-btn:active {
+            transform: scale(0.97);
+        }
+
+        .social-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 4px;
-            min-height: 22px;
-            text-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+            gap: 24px;
         }
 
-        .cyber-cursor {
-            width: 2px;
-            height: 14px;
-            background-color: var(--neon-purple);
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* أزرار مخصصة فخمة مع تأثير التوهج والوميض العاكس عند التمرير */
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 30px;
-        }
-
-        .glass-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 16px;
-            color: var(--text-primary);
+        .social-link {
+            color: #e2e8f0;
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-            overflow: hidden;
+            padding: 12px 26px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .glass-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .glass-btn:hover::after {
-            transform: translateX(100%);
-        }
-
-        .glass-btn:hover, .glass-btn:active {
-            background: rgba(168, 85, 247, 0.12);
-            border-color: rgba(168, 85, 247, 0.35);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2);
-        }
-
-        /* ويدجيت البيانات الرقمية لبيئة الزائر */
-        .dashboard-widget {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .widget-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: right;
-            padding: 4px 6px;
-        }
-
-        .widget-item:first-child {
-            border-left: 1px solid rgba(255, 255, 255, 0.06);
-            padding-left: 10px;
-        }
-
-        .item-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 300;
-        }
-
-        .item-value {
-            font-size: 0.85rem;
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
-            font-weight: 700;
+            transform: translateY(-4px);
         }
 
-        .footer-credits {
-            margin-top: 30px;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.15);
-            letter-spacing: 0.5px;
+        .social-link.insta:hover {
+            border-color: #ec4899;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.25);
         }
 
-        @media (max-width: 480px) {
-            body { padding: 15px; }
-            .glass-card { padding: 35px 22px; }
+        .social-link.tele:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+        }
+
+        @keyframes advancedCollapse {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+            50% { transform: scale(1.1) rotate(2deg); opacity: 0.5; filter: blur(5px); }
+            100% { transform: scale(0.5) rotate(-5deg); opacity: 0; filter: blur(40px); }
+        }
+
+        .explode {
+            animation: advancedCollapse 0.7s forwards cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        }
+
+        .ios-toast {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(10, 5, 22, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #f8fafc;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: bottom 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .ios-toast.show {
+            bottom: 45px;
         }
     </style>
 </head>
 <body>
 
-    <canvas id="interactive-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="glass-card" id="card">
-        <div class="glitch-code-box">
-            <div class="code-header">
-                <div class="dot blue"></div>
-                <div class="dot"></div>
-                <div class="dot purple"></div>
-            </div>
-            <div class="glitch-text" id="glitch-target">جاري التحميل...</div>
-        </div>
-
-        <h1 class="title">سيف علي</h1>
+    <div class="glass-card" id="main-card">
+        <h1>سيف علي</h1>
+        <p class="subtitle">خلصنا امتحان</p>
         
-        <div class="cyber-subtitle">
-            <span id="cyber-target"></span><span class="cyber-cursor"></span>
-        </div>
+        <button class="close-btn" onclick="closeAction()">
+            بااااي
+        </button>
 
-        <div class="links-container">
-            <a href="https://t.me/WWGTR" target="_blank" class="glass-btn">تليجرام</a>
-            <a href="https://instagram.com/NE_7U" target="_blank" class="glass-btn">انستجرام</a>
-        </div>
-
-        <div class="dashboard-widget">
-            <div class="widget-item">
-                <span class="item-label">المتصفح النشط</span>
-                <span class="item-value" id="browser-name">جاري الفحص</span>
-            </div>
-            <div class="widget-item">
-                <span class="item-label">الموقع الحالي</span>
-                <span class="item-value" id="user-location">جاري التحديد</span>
-            </div>
-        </div>
-
-        <div class="footer-credits">
-            &copy; WWGTR
+        <div class="social-container">
+            <a href="https://instagram.com/ne_7u" target="_blank" class="social-link insta">إنستغرام</a>
+            <a href="https://t.me/wwgtr" target="_blank" class="social-link tele">تليغرام</a>
         </div>
     </div>
 
+    <!-- الإشعار السفلي المحدث بالعبارة الجديدة -->
+    <div class="ios-toast" id="toast">الحمد لله على كل شيء</div>
+
     <script>
-        // 1. برمجة محرك الشفق السائل وشبكة جزيئات السايبر (Liquid Aurora & Cyber Mesh)
-        const canvas = document.getElementById('interactive-canvas');
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height;
-        let mouse = { x: undefined, y: undefined, radius: 150 };
 
-        function initCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+        let particlesArray = [];
+        const numberOfParticles = 75;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        const updatePointer = (e) => {
-            mouse.x = e.touches ? e.touches[0].clientX : e.clientX;
-            mouse.y = e.touches ? e.touches[0].clientY : e.clientY;
-        };
-        window.addEventListener('mousemove', updatePointer);
-        window.addEventListener('touchmove', updatePointer);
-        window.addEventListener('mouseleave', () => { mouse.x = undefined; mouse.y = undefined; });
-        window.addEventListener('touchend', () => { mouse.x = undefined; mouse.y = undefined; });
-
-        // إعداد الهالات الضوئية المتحركة في الخلفية (Liquid Aurora)
-        let auroraBlobs = [
-            { x: 0, y: 0, vx: 0.3, vy: 0.4, radius: 400, color: 'rgba(168, 85, 247, 0.12)' },
-            { x: 0, y: 0, vx: -0.2, vy: -0.3, radius: 450, color: 'rgba(59, 130, 246, 0.1)' }
-        ];
-        auroraBlobs[0].x = width * 0.2; auroraBlobs[0].y = height * 0.3;
-        auroraBlobs[1].x = width * 0.8; auroraBlobs[1].y = height * 0.7;
-
-        // توليد الجزيئات للشبكة المتصلة
-        const numParticles = Math.min(Math.floor(window.innerWidth / 12), 70);
-        let particles = [];
-        for (let i = 0; i < numParticles; i++) {
-            particles.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                size: Math.random() * 1.5 + 0.5,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3
-            });
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 160
         }
 
-        function renderSystem() {
-            ctx.fillStyle = '#030307';
-            ctx.fillRect(0, 0, width, height);
+        function updateMouseCoords(x, y) {
+            mouse.x = x;
+            mouse.y = y;
+        }
 
-            // 1. رسم وتحريك الأورورا السائلة الفخمة
-            auroraBlobs.forEach(b => {
-                b.x += b.vx; b.y += b.vy;
-                if (b.x < 0 || b.x > width) b.vx *= -1;
-                if (b.y < 0 || b.y > height) b.vy *= -1;
+        window.addEventListener('mousemove', (e) => updateMouseCoords(e.x, e.y));
+        window.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
 
-                let grad = ctx.createRadialGradient(b.x, b.y, 10, b.x, b.y, b.radius);
-                grad.addColorStop(0, b.color);
-                grad.addColorStop(1, 'transparent');
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
 
-            // 2. تحريك ورسم جزيئات ومصفوفة الشبكة المتصلة (Cyber Mesh Grid)
-            particles.forEach((p, idx) => {
-                p.x += p.vx; p.y += p.vy;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3.5 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                
+                let rand = Math.random();
+                if (rand < 0.4) this.color = 'rgba(236, 72, 153, 0.35)';
+                else if (rand < 0.7) this.color = 'rgba(139, 92, 246, 0.3)';
+                else this.color = 'rgba(56, 189, 248, 0.35)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-                // التفاعل مع حركات الماوس واللمس بالجاذبية الناعمة
-                if (mouse.x !== undefined && mouse.y !== undefined) {
-                    let dx = mouse.x - p.x;
-                    let dy = mouse.y - p.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) {
-                        p.x += (dx / dist) * 1.2;
-                        p.y += (dy / dist) * 1.2;
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = forceDirectionX * force * 6;
+                        let directionY = forceDirectionY * force * 6;
+                        this.x -= directionX;
+                        this.y -= directionY;
                     }
                 }
-
-                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
-
+            }
+            draw() {
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.size > 1.3 ? 'rgba(168, 85, 247, 0.5)' : 'rgba(255, 255, 255, 0.4)';
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
                 ctx.fill();
+            }
+        }
 
-                // رسم خيوط الشبكة البرمجية الفاخرة بين النقاط المتقاربة
-                for (let j = idx + 1; j < particles.length; j++) {
-                    let p2 = particles[j];
-                    let dx = p.x - p2.x;
-                    let dy = p.y - p2.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
 
-                    if (dist < 100) {
-                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.06 - (dist / 100) * 0.06})`;
-                        ctx.lineWidth = 0.5;
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 130) {
                         ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.12 - (distance/130) * 0.12})`;
+                        ctx.lineWidth = 0.9;
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                         ctx.stroke();
                     }
                 }
-            });
-
-            requestAnimationFrame(renderSystem);
+            }
         }
-        renderSystem();
 
-
-        // 2. برمجة تأثير فك التشفير البرمجي لجملة (خلصنا امتحان)
-        const targetText = "خلصنا امتحان";
-        const glyphs = "0110101100110101101001110010101101100101110111110111011";
-        const element = document.getElementById('glitch-target');
-        let iterations = 0;
-        let interval = null;
-
-        function startDecryption() {
-            clearInterval(interval);
-            iterations = 0;
+        function animate() {
+            ctx.fillStyle = 'rgba(2, 1, 7, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            interval = setInterval(() => {
-                element.innerText = targetText
-                    .split("")
-                    .map((letter, index) => {
-                        if (index < iterations) {
-                            return targetText[index];
-                        }
-                        return glyphs[Math.floor(Math.random() * glyphs.length)];
-                    })
-                    .join("");
-
-                if (iterations >= targetText.length) {
-                    clearInterval(interval);
-                    setTimeout(startDecryption, 4500); // تكرار النبض البرمجي الممتع كل 4.5 ثوانٍ
-                }
-                iterations += 1 / 3;
-            }, 45);
-        }
-        startDecryption();
-
-
-        // 3. برمجة تأثير التشفير المحترف المستمر لوصف (مطور تطبيقات)
-        const cyberText = "مطور تطبيقات";
-        const cyberElement = document.getElementById('cyber-target');
-        let cyberIndex = 0;
-
-        function typeCyberEffect() {
-            if (cyberIndex < cyberText.length) {
-                cyberElement.innerText += cyberText[cyberIndex];
-                cyberIndex++;
-                setTimeout(typeCyberEffect, 140);
-            } else {
-                setTimeout(() => { eraseCyberEffect(); }, 3500);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
             }
+            connectParticles();
+            requestAnimationFrame(animate);
         }
 
-        function eraseCyberEffect() {
-            if (cyberIndex > 0) {
-                cyberElement.innerText = cyberText.substring(0, cyberIndex - 1);
-                cyberIndex--;
-                setTimeout(eraseCyberEffect, 70);
-            } else {
-                setTimeout(typeCyberEffect, 600);
-            }
-        }
-        setTimeout(typeCyberEffect, 800);
+        init();
+        animate();
 
+        const card = document.getElementById('main-card');
+        window.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg) translateZ(30px)`;
+        });
 
-        // 4. تأثير تمايل ثلاثي الأبعاد ناعم وفاخر مخصص للحواسب والأجهزة القوية
-        if (window.innerWidth > 768) {
-            const card = document.getElementById('card');
-            document.addEventListener('mousemove', (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        window.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(30px)`;
+        });
+
+        // الشاشة النهائية المعدلة بعبارة الحمد لله على كل شيء
+        function closeAction() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+
+            card.classList.add('explode');
+            
+            particlesArray.forEach(p => {
+                p.speedX *= 12;
+                p.speedY *= 12;
             });
-            document.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            });
-        }
 
-        // 5. فحص بيئة المتصفح وجلب الموقع التقريبي
-        function detectBrowser() {
-            const ua = navigator.userAgent;
-            let browser = "متصفح ذكي";
-            if (ua.indexOf("Firefox") > -1) browser = "Firefox";
-            else if (ua.indexOf("SamsungBrowser") > -1) browser = "Samsung Internet";
-            else if (ua.indexOf("Edg/") > -1) browser = "MS Edge";
-            else if (ua.indexOf("Chrome") > -1) browser = "Chrome";
-            else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) browser = "Safari";
-            document.getElementById('browser-name').textContent = browser;
+            setTimeout(() => {
+                document.body.innerHTML = `
+                    <div style="color: #ffffff; font-size: 1.4rem; text-align: center; font-weight: 500; letter-spacing: 1px; text-shadow: 0 0 15px rgba(236,72,153,0.6); font-family: sans-serif;">
+                        الحمد لله على كل شيء
+                    </div>
+                `;
+                document.body.style.background = '#020107';
+            }, 700);
         }
-
-        async function fetchGeo() {
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById('user-location').textContent = data.city || data.country_name;
-                } else {
-                    document.getElementById('user-location').textContent = "آمن ومحمي";
-                }
-            } catch {
-                document.getElementById('user-location').textContent = "مجهول";
-            }
-        }
-
-        detectBrowser();
-        fetchGeo();
     </script>
 </body>
 </html>
