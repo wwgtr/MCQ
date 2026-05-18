@@ -1,1320 +1,490 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار MCQ - Basic Business & Administrative English</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>سيف علي | Saif Ali</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #16a085;
-            --bg-color: #f4f6f7;
-            --card-bg: #ffffff;
-            --text-color: #2c3e50;
-            --success-color: #2ecc71;
-            --error-color: #e74c3c;
-            --accent-color: #34495e;
-            --telegram-color: #0088cc;
-            --instagram-color: #e1306c;
-            
-            /* ألوان مطابقة الكلمات للتلوين التفاعلي */
-            --w1: #2980b9;
-            --w2: #8e44ad;
-            --w3: #d35400;
-            --w4: #27ae60;
-            --w5: #16a085;
-            --w6: #c0392b;
+            --bg-dark: #030307;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.07);
+            --glass-blur: blur(30px);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.45);
+            --neon-purple: #a855f7;
+            --neon-blue: #3b82f6;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+
+        * {
             margin: 0;
-            padding: 20px;
-            direction: ltr;
-        }
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding-top: 80px;
-        }
-        
-        .score-board {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 12px 20px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        .score-box {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 6px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.3s ease;
-        }
-        .score-box.highlight {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        .score-num {
-            color: #f1c40f;
-            font-size: 1.3rem;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            font-size: 2.2rem;
-            letter-spacing: 0.5px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        
-        .suggestions-box {
-            background-color: #fff;
-            border-left: 5px solid var(--secondary-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-        .suggestions-box h3 {
-            margin-top: 0;
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-        }
-        .suggestions-box ul {
-            margin-bottom: 0;
-            padding-left: 20px;
-        }
-        .suggestions-box li {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .question-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-            border: 1px solid #eef2f5;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .question-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-        }
-        .question-text {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-            line-height: 1.4;
-        }
-        
-        /* تصميم الترجمة الملونة أسفل كل سؤال */
-        .translation-text {
-            font-size: 0.9rem;
-            margin-bottom: 18px;
-            padding: 4px 0;
-            border-bottom: 1px dashed #e2e8f0;
-            direction: rtl;
-            text-align: right;
-            font-weight: 500;
-        }
-        
-        /* وسوم تلوين الكلمات المتطابقة */
-        .c1 { color: var(--w1); font-weight: 600; }
-        .c2 { color: var(--w2); font-weight: 600; }
-        .c3 { color: var(--w3); font-weight: 600; }
-        .c4 { color: var(--w4); font-weight: 600; }
-        .c5 { color: var(--w5); font-weight: 600; }
-        .c6 { color: var(--w6); font-weight: 600; }
-
-        .options-list {
-            list-style: none;
             padding: 0;
-            margin: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
-        .option-item {
-            padding: 14px 18px;
-            background: #f8fafc;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid #edf2f7;
-            font-size: 1rem;
-            color: #4a5568;
-        }
-        .option-item:hover {
-            background: #edf2f7;
-            border-color: #cbd5e0;
-            transform: translateX(4px);
-        }
-        .option-item.correct {
-            background-color: #e8f5e9 !important;
-            border-color: var(--success-color) !important;
-            color: #1b5e20 !important;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.2);
-        }
-        .option-item.incorrect {
-            background-color: #ffebee !important;
-            border-color: var(--error-color) !important;
-            color: #b71c1c !important;
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
-        }
-        .disabled {
-            pointer-events: none;
-            opacity: 0.8;
-        }
-        
-        .social-contacts {
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        .social-link {
-            display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 30px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-        .social-link.telegram {
-            background-color: var(--telegram-color);
-        }
-        .social-link.instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
         }
 
-        footer {
+        /* قماش الخلفية للشبكة التفاعلية والأورورا السائلة */
+        #interactive-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* كرت الزجاج الرئيسي الفخم الفوق متطور */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 40px 28px;
+            width: 100%;
+            max-width: 385px;
             text-align: center;
-            margin-top: 40px;
-            padding: 25px;
-            border-top: 1px solid #e2e8f0;
-            color: #718096;
-            font-weight: bold;
-            font-size: 1.2rem;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 
+                        inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            z-index: 2;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* لوحة الهاكر المشوشة الأنيقة والمطورة بحدود متوهجة */
+        .glitch-code-box {
+            font-family: "Courier New", Courier, monospace;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            padding: 16px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.15), 
+                        0 4px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            justify-content: flex-start;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .dot.purple { background: var(--neon-purple); }
+        .dot.blue { background: var(--neon-blue); }
+
+        /* النص الرئيسي المشوش المتوهج */
+        .glitch-text {
+            color: #ffffff;
+            font-size: 1.65rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.65), 0 0 25px rgba(59, 130, 246, 0.3);
+            min-height: 38px;
+        }
+
+        .title {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* تأثير التشفير الاحترافي لوصف مطور تطبيقات */
+        .cyber-subtitle {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--neon-purple);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            min-height: 22px;
+            text-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+        }
+
+        .cyber-cursor {
+            width: 2px;
+            height: 14px;
+            background-color: var(--neon-purple);
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* أزرار مخصصة فخمة مع تأثير التوهج والوميض العاكس عند التمرير */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .glass-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .glass-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .glass-btn:hover, .glass-btn:active {
+            background: rgba(168, 85, 247, 0.12);
+            border-color: rgba(168, 85, 247, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2);
+        }
+
+        /* ويدجيت البيانات الرقمية لبيئة الزائر */
+        .dashboard-widget {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .widget-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: right;
+            padding: 4px 6px;
+        }
+
+        .widget-item:first-child {
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+            padding-left: 10px;
+        }
+
+        .item-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-weight: 300;
+        }
+
+        .item-value {
+            font-size: 0.85rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-credits {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 15px; }
+            .glass-card { padding: 35px 22px; }
         }
     </style>
 </head>
 <body>
 
-<div class="score-board">
-    <div>اختبار MCQ الإنجليزي الإداري</div>
-    <div class="score-box" id="score-container">الدرجة النهائية: <span class="score-num" id="live-score">0</span> / 200</div>
-    <div class="score-box">التقدم: <span id="answered-count">0</span> / 200</div>
-</div>
+    <canvas id="interactive-canvas"></canvas>
 
-<div class="container">
-    <h1>اختبار MCQ</h1>
-    <div class="subtitle">Basic Business & Administrative English | Lecture 1 & Lecture 2</div>
-    
-    <div class="suggestions-box">
-        <h3>💡 Study Suggestions & Exam Tips</h3>
-        <ul>
-            <li><strong>Vocabulary Upgrades:</strong> Focus heavily on transforming informal words into formal alternatives (e.g., <em>want → request</em>, <em>tell → inform</em>, <em>get → obtain</em>) as these are highly expected in administrative settings.</li>
-            <li><strong>Preposition Precision:</strong> Remember key combinations like <em>"responsible for"</em>, <em>"in charge of"</em>, and <em>"report to"</em>. They are standard parts of workplace expressions.</li>
-            <li><strong>Email Layout:</strong> Keep paragraphs short (2-3 sentences) for optimal digital readability, and never omit the concise 4-part structure (Subject, Greeting, Body, Closing).</li>
-            <li><strong>Financial Formulas:</strong> Keep the basic conditions in mind: <strong>Profit</strong> requires Income > Expenses, while <strong>Loss</strong> occurs when Expenses > Income.</li>
-        </ul>
-    </div>
-    
-    <div id="quiz-container"></div>
-    
-    <div class="social-contacts">
-        <a href="https://t.me/WWGTR" target="_blank" class="social-link telegram">
-            ✈ Telegram: @WWGTR
-        </a>
-        <a href="https://instagram.com/NE_7U" target="_blank" class="social-link instagram">
-            📸 Instagram: @NE_7U
-        </a>
-    </div>
+    <div class="glass-card" id="card">
+        <div class="glitch-code-box">
+            <div class="code-header">
+                <div class="dot blue"></div>
+                <div class="dot"></div>
+                <div class="dot purple"></div>
+            </div>
+            <div class="glitch-text" id="glitch-target">جاري التحميل...</div>
+        </div>
 
-    <footer>
-        All Rights Reserved &copy; Saif Ali
-    </footer>
-</div>
-
-<script>
-const quizData = [
-    // --- PART 1: MCQs (1 to 55) ---
-    { 
-        q: "1. What is the <span class='c1'>main focus</span> of <span class='c2'>Basic Business</span> & <span class='c3'>Administrative English</span>?", 
-        t: "1. ما هو <span class='c1'>التركيز الأساسي</span> لـ <span class='c2'>اللغة الإنجليزية التجارية الأساسية</span> و <span class='c3'>الإدارية</span>؟",
-        a: ["Complex Grammar rules", "Practical Workplace English", "English Literature", "Poetry and essays"], c: 1 
-    },
-    { 
-        q: "2. Which <span class='c1'>job role</span> is defined as the person who <span class='c2'>controls and supervises</span> <span class='c3'>work</span>?", 
-        t: "2. أي <span class='c1'>دور وظيفي</span> يتم تعريفه على أنه الشخص الذي <span class='c2'>يتنحكم ويشرف على</span> <span class='c3'>العمل</span>؟",
-        a: ["Accountant", "Clerk", "Manager", "HR"], c: 2 
-    },
-    { 
-        q: "3. Who is <span class='c1'>responsible</span> for handling the company's <span class='c2'>money</span> and preparing <span class='c3'>financial reports</span>?", 
-        t: "3. من هو <span class='c1'>المسؤول</span> عن إدارة <span class='c2'>أموال</span> الشركة وإعداد <span class='c3'>التقارير المالية</span>؟",
-        a: ["Clerk", "Accountant", "HR Manager", "Salesperson"], c: 1 
-    },
-    { 
-        q: "4. What does the <span class='c1'>acronym</span> <span class='c2'>'HR'</span> stand for in <span class='c3'>business administration</span>?", 
-        t: "4. ماذا يعني <span class='c1'>الاختصار</span> <span class='c2'>'HR'</span> في <span class='c3'>إدارة الأعمال</span>؟",
-        a: ["Human Resources", "High Returns", "Human Relations", "Higher Ranks"], c: 0 
-    },
-    { 
-        q: "5. Which <span class='c1'>department</span> manages <span class='c2'>employee hiring</span> and <span class='c3'>staff relations</span>?", 
-        t: "5. أي <span class='c1'>قسم</span> يدير <span class='c2'>توظيف الموظفين</span> و <span class='c3'>علاقات الموظفين</span>؟",
-        a: ["Finance", "HR", "Accounting", "Marketing"], c: 1 
-    },
-    { 
-        q: "6. The department that <span class='c1'>manages budgets</span> and <span class='c2'>company money</span> is:", 
-        t: "6. القسم الذي <span class='c1'>يدير الميزانيات</span> و <span class='c2'>أموال الشركة</span> هو:",
-        a: ["HR", "Clerk office", "Finance", "Production"], c: 2 
-    },
-    { 
-        q: "7. What is the <span class='c1'>primary role</span> of a <span class='c2'>'Clerk'</span> in an <span class='c3'>office setting</span>?", 
-        t: "7. ما هو <span class='c1'>الدور الأساسي</span> لـ <span class='c2'>'الكاتب/الموظف الإداري'</span> في <span class='c3'>بيئة المكتب</span>؟",
-        a: ["Managing company budgets", "Hiring new staff", "Filing documents and doing general office work", "Supervising the manager"], c: 2 
-    },
-    { 
-        q: "8. What is the <span class='c1'>definition</span> of <span class='c2'>'Market'</span> in basic <span class='c3'>economic terms</span>?", 
-        t: "8. ما هو <span class='c1'>تعريف</span> <span class='c2'>'السوق'</span> في <span class='c3'>المصطلحات الاقتصادية</span> الأساسية؟",
-        a: ["The money gained from selling", "A place of buying and selling", "The need for products", "The amount of available products"], c: 1 
-    },
-    { 
-        q: "9. In economics, <span class='c1'>'Supply'</span> <span class='c2'>refers to</span>:", 
-        t: "9. في الاقتصاد، <span class='c1'>'العرض'</span> <span class='c2'>يشير إلى</span>:",
-        a: ["The need for products", "The amount of products available", "The price of a product", "The money lost in business"], c: 1 
-    },
-    { 
-        q: "10. What is <span class='c1'>'Demand'</span>?", 
-        t: "10. ما هو <span class='c1'>'الطلب'</span>؟",
-        a: ["The money gained from a shop", "The amount of products provided", "The need for products by customers", "The quality of a physical item"], c: 2 
-    },
-    { 
-        q: "11. <span class='c1'>Profit</span> is <span class='c2'>earned</span> when:", 
-        t: "11. يتم <span class='c2'>جني</span> <span class='c1'>الربح</span> عندما:",
-        a: ["Expenses are greater than Income", "Income is greater than Expenses", "Income equals Expenses", "No products are sold"], c: 1 
-    },
-    { 
-        q: "12. A <span class='c1'>'Loss'</span> <span class='c2'>happens</span> in business when:", 
-        t: "12. <span class='c2'>تحدث</span> <span class='c1'>'الخسارة'</span> في الأعمال التجارية عندما:",
-        a: ["Income > Expenses", "Expenses > Income", "Supply > Demand", "Customers buy more products"], c: 1 
-    },
-    { 
-        q: "13. What is the <span class='c1'>primary goal</span> of all <span class='c2'>companies</span>?", 
-        t: "13. ما هو <span class='c1'>الهدف الأساسي</span> لجميع <span class='c2'>الشركات</span>؟",
-        a: ["To experience loss", "To avoid hiring staff", "To make a profit", "To write informal emails"], c: 2 
-    },
-    { 
-        q: "14. Complete the expression: 'She is ______ <span class='c1'>charge of</span> the <span class='c2'>finance department</span>.'", 
-        t: "14. أكمل التعبير: 'هي مسؤولة ______ <span class='c1'>إدارة</span> <span class='c2'>قسم المالية</span>.'",
-        a: ["at", "in", "on", "for"], c: 1 
-    },
-    { 
-        q: "15. Complete the expression: 'The accountant is <span class='c1'>responsible</span> ______ <span class='c2'>financial reports</span>.'", 
-        t: "15. أكمل التعبير: 'المحاسب <span class='c1'>مسؤول</span> ______ <span class='c2'>التقارير المالية</span>.'",
-        a: ["to", "with", "for", "about"], c: 2 
-    },
-    { 
-        q: "16. Complete the expression: 'Employees <span class='c1'>report</span> ______ the <span class='c2'>manager</span>.'", 
-        t: "16. أكمل التعبير: 'الموظفون <span class='c1'>يرفعون تقاريرهم</span> ______ <span class='c2'>المدير</span>.'",
-        a: ["to", "for", "at", "with"], c: 0 
-    },
-    { 
-        q: "17. Which of the following is a <span class='c1'>physical thing</span> you can <span class='c2'>touch</span>?", 
-        t: "17. أي مما يلي هو <span class='c1'>شيء مادي</span> يمكنك <span class='c2'>لمسه</span>؟",
-        a: ["Service", "Product", "Expression", "Register"], c: 1 
-    },
-    { 
-        q: "18. Which of the following is <span class='c1'>considered</span> a <span class='c2'>'Service'</span>?", 
-        t: "18. أي مما يلي <span class='c1'>يعتبر</span> <span class='c2'>'خدمة'</span>؟",
-        a: ["Phone", "Car", "Haircut", "Book"], c: 2 
-    },
-    { 
-        q: "19. 'Work that <span class='c1'>someone does</span> for you' is the <span class='c2'>definition</span> of:", 
-        t: "19. 'العمل الذي <span class='c1'>يقوم به شخص ما</span> من أجلك' هو <span class='c2'>تعريف</span> الـ:",
-        a: ["Product", "Service", "Supply", "Demand"], c: 1 
-    },
-    { 
-        q: "20. Which of these is an <span class='c1'>example</span> of a <span class='c2'>'Product'</span>?", 
-        t: "20. أي من هذه هو <span class='c1'>مثال</span> على <span class='c2'>'المنتج'</span>؟",
-        a: ["Banking", "Taxi Ride", "Food", "Education"], c: 2 
-    },
-    { 
-        q: "21. What is the <span class='c1'>definition</span> of <span class='c2'>'Buy'</span>?", 
-        t: "21. ما هو <span class='c1'>تعريف</span> كلمة <span class='c2'>'شراء'</span>؟",
-        a: ["To give something for money", "To get something by paying money", "To file a business report", "To supervise office employees"], c: 1 
-    },
-    { 
-        q: "22. 'To give something for money' is the <span class='c1'>definition</span> of <span class='c2'>Sell</span>?", 
-        t: "22. 'إعطاء شيء مقابل المال' هو <span class='c1'>تعريف</span> كلمة <span class='c2'>بيع</span>؟",
-        a: ["Buy", "Sell", "Price", "Quality"], c: 1 
-    },
-    { 
-        q: "23. Who is a <span class='c1'>'Customer'</span>?", 
-        t: "23. من هو <span class='c1'>'الزبون/العميل'</span>؟",
-        a: ["The person who supervises work", "The person who buys something", "The person who sells something", "The person who files documents"], c: 1 
-    },
-    { 
-        q: "24. Who is a <span class='c1'>'Seller'</span>?", 
-        t: "24. من هو <span class='c1'>'البائع'</span>؟",
-        a: ["The person who handles the budget", "The person who provides work for free", "The person who sells something", "The person who buys goods"], c: 2 
-    },
-    { 
-        q: "25. What does <span class='c1'>'Quality'</span> <span class='c2'>mean</span>?", 
-        t: "25. ماذا <span class='c2'>تعني</span> كلمة <span class='c1'>'الجودة'</span>؟",
-        a: ["How much something costs", "How good or bad something is", "The location of buying and selling", "A type of durable good"], c: 1 
-    },
-    { 
-        q: "26. <span class='c1'>'Price'</span> is <span class='c2'>defined</span> as:", 
-        t: "26. يتم <span class='c2'>تعريف</span> <span class='c1'>'السعر'</span> على أنه:",
-        a: ["How good a product is", "How much something costs", "The amount of available goods", "Professional communication"], c: 1 
-    },
-    { 
-        q: "27. Which of the following is a <span class='c1'>'Consumer Product'</span> used for <span class='c2'>daily life</span>?", 
-        t: "27. أي مما يلي هو <span class='c1'>'منتج استهلاكي'</span> مستخدم في <span class='c2'>الحياة اليومية</span>؟",
-        a: ["Office Furniture", "Refrigerator", "Soap", "Heavy Machine"], c: 2 
-    },
-    { 
-        q: "28. Which of these is <span class='c1'>classified</span> as a <span class='c2'>'Durable Good'</span>?", 
-        t: "28. أي من هذه <span class='c1'>يُصنف</span> كـ <span class='c2'>'سلعة معمرة'</span>؟",
-        a: ["Milk", "Bread", "TV", "Soap"], c: 2 
-    },
-    { 
-        q: "29. What are <span class='c1'>'Business Products'</span> <span class='c2'>used for</span>?", 
-        t: "29. <span class='c2'>لِماذا تُستخدم</span> <span class='c1'>'المنتجات التجارية'</span>؟",
-        a: ["Daily personal consumption", "Used by companies to operate and create other products", "Given away for free to customers", "Personal entertainment only"], c: 1 
-    },
-    { 
-        q: "30. Which of the following is an <span class='c1'>example</span> of a <span class='c2'>Business Product</span>?", 
-        t: "30. أي مما يلي هو <span class='c1'>مثال</span> على <span class='c2'>منتج تجاري</span>؟",
-        a: ["Chocolate", "Computer used in an office", "Loaf of bread", "Haircut service"], c: 1 
-    },
-    { 
-        q: "31. A service provided for <span class='c1'>individuals</span> and <span class='c2'>daily life</span> is a:", 
-        t: "31. الخدمة المقدمة لـ <span class='c1'>الأفراد</span> و <span class='c2'>الحياة اليومية</span> هي:",
-        a: ["Business Service", "Professional Service", "Personal Service", "Administrative Service"], c: 2 
-    },
-    { 
-        q: "32. Services that <span class='c1'>require special training</span> and <span class='c2'>expertise</span> are:", 
-        t: "32. الخدمات التي <span class='c1'>تتطلب تدريباً خاصاً</span> و <span class='c2'>خبرة</span> هي:",
-        a: ["Personal Services", "Professional Services", "Consumer Services", "Durable Services"], c: 1 
-    },
-    { 
-        q: "33. Services that <span class='c1'>support companies</span> and <span class='c2'>organizations</span> are:", 
-        t: "33. الخدمات التي <span class='c1'>تدعم الشركات</span> و <span class='c2'>المؤسسات</span> هي:",
-        a: ["Personal Services", "Business Services", "Informal Services", "Retail Products"], c: 1 
-    },
-    { 
-        q: "34. Which <span class='c1'>customer phrase</span> is used when <span class='c2'>asking about price</span>?", 
-        t: "34. أي <span class='c1'>عبارة زبون</span> تُستخدم عند <span class='c2'>السؤال عن السعر</span>؟",
-        a: ["It has good quality.", "I'll take this one.", "How much is this?", "Do you have a cheaper one?"], c: 2 
-    },
-    { 
-        q: "35. Which <span class='c1'>phrase</span> indicates <span class='c2'>making a purchase</span>?", 
-        t: "35. أي <span class='c1'>عبارة</span> تشير إلى <span class='c2'>إجراء عملية شراء</span>؟",
-        a: ["What's the price?", "I'll buy it.", "It's $200.", "Please come again!"], c: 1 
-    },
-    { 
-        q: "36. Which of the following is a <span class='c1'>sign</span> of <span class='c2'>GOOD customer service</span>?", 
-        t: "36. أي مما يلي يعتبر <span class='c1'>علامة</span> على <span class='c2'>خدمة عملاء جيدة</span>؟",
-        a: ["Rude behavior", "Slow service", "Friendly smile and helpful answers", "Ignoring the customer"], c: 2 
-    },
-    { 
-        q: "37. 'Staff look <span class='c1'>angry or bored</span>' is an <span class='c2'>example</span> of:", 
-        t: "37. 'الموظفون يبدون <span class='c1'>غاضبين أو يشعرون بالملل</span>' هو <span class='c2'>مثال</span> على:",
-        a: ["Good Customer Service", "Professional Service", "Bad Customer Service", "Administrative Writing"], c: 2 
-    },
-    { 
-        q: "38. What is <span class='c1'>'Register'</span> in <span class='c2'>English communication</span>?", 
-        t: "38. ما هو <span class='c1'>'Register (مستوى اللغة)'</span> في <span class='c2'>التواصل باللغة الإنجليزية</span>؟",
-        a: ["A table of economic terms", "Choosing our English style depending on the situation and the reader", "Sending an email to a friend", "Filling out a job application form"], c: 1 
-    },
-    { 
-        q: "39. <span class='c1'>Formal English</span> is <span class='c2'>used with</span>:", 
-        t: "39. <span class='c1'>اللغة الإنجليزية الرسمية</span> يتم <span class='c2'>استخدامها مع</span>:",
-        a: ["Friends and family", "Close colleagues during lunch", "Offices, institutions, universities, and business", "Text messages and social media"], c: 2 
-    },
-    { 
-        q: "40. What is the <span class='c1'>typical tone</span> of <span class='c2'>Informal English</span>?", 
-        t: "40. ما هي <span class='c1'>النبرة النموذجية</span> لـ <span class='c2'>اللغة الإنجليزية غير الرسمية</span>؟",
-        a: ["Polite, respectful, indirect", "Casual, relaxed, conversational", "Academic and serious", "Rigid and institutional"], c: 1 
-    },
-    { 
-        q: "41. Which <span class='c1'>medium</span> is <span class='c2'>appropriate</span> for <span class='c3'>Formal English</span>?", 
-        t: "41. أي <span class='c1'>وسيط</span> يعتبر <span class='c2'>مناسباً</span> لـ <span class='c3'>اللغة الإنجليزية الرسمية</span>؟",
-        a: ["Chat platforms", "Written documents, professional emails, and reports", "Text messages to family", "Casual spoken conversation"], c: 1 
-    },
-    { 
-        q: "42. What is the <span class='c1'>formal alternative</span> for the <span class='c2'>informal word 'Hi'</span>?", 
-        t: "42. ما هو <span class='c1'>البديل الرسمي</span> للكلمة <span class='c2'>غير الرسمية 'Hi'</span>؟",
-        a: ["Thanks", "Dear Sir/Madam", "Clear structure", "Yours sincerely"], c: 1 
-    },
-    { 
-        q: "43. Instead of using the <span class='c1'>informal phrase</span> <span class='c2'>'I want'</span>, you should write:", 
-        t: "43. بدلاً من استخدام <span class='c1'>العبارة غير الرسمية</span> <span class='c2'>'أنا أريد'</span>، يجب أن تكتب:",
-        a: ["Send me", "I would like / Request", "Give me", "Get"], c: 1 
-    },
-    { 
-        q: "44. <span class='c1'>Upgrade</span> the informal word <span class='c2'>'Tell'</span> to <span class='c3'>formal business English</span>:", 
-        t: "44. <span class='c1'>رَقِّ الكلمة</span> غير الرسمية <span class='c2'>'Tell'</span> إلى <span class='c3'>إنجليزية أعمال رسمية</span>:",
-        a: ["Obtain", "Inform", "Assist", "Request"], c: 1 
-    },
-    { 
-        q: "45. Change <span class='c1'>'Thanks'</span> to its proper <span class='c2'>formal equivalent</span>:", 
-        t: "45. حوّل <span class='c1'>'Thanks'</span> إلى ما <span class='c2'>يعادلها رسمياً</span> وبشكل صحيح:",
-        a: ["Hi", "Thank you", "Help", "Regards"], c: 1 
-    },
-    { 
-        q: "46. What is the <span class='c1'>formal word</span> for <span class='c2'>'Help'</span>?", 
-        t: "46. ما هي <span class='c1'>الكلمة الرسمية</span> لـ <span class='c2'>'Help'</span>؟",
-        a: ["Assist", "Obtain", "Ask for", "Inform"], c: 0 
-    },
-    { 
-        q: "47. What is the <span class='c1'>formal word</span> for <span class='c2'>'Get'</span>?", 
-        t: "47. ما هي <span class='c1'>الكلمة الرسمية</span> لـ <span class='c2'>'Get'</span>؟",
-        a: ["Tell", "Obtain", "Provide", "Send"], c: 1 
-    },
-    { 
-        q: "48. Instead of writing <span class='c1'>'Send me'</span> in a formal email, you should write:", 
-        t: "48. بدلاً من كتابة <span class='c1'>'أرسل لي'</span> في بريد إلكتروني رسمي، يجب أن تكتب:",
-        a: ["I want", "Please provide", "Ask for", "Hi"], c: 1 
-    },
-    { 
-        q: "49. Why does an email starting with <span class='c1'>'Hi'</span> and ending with <span class='c2'>'Thanks'</span> <span class='c3'>fail</span>?", 
-        t: "49. لماذا <span class='c3'>يفشل</span> البريد الإلكتروني الذي يبدأ بـ <span class='c1'>'Hi'</span> وينتهي بـ <span class='c2'>'Thanks'</span>؟",
-        a: ["It has short paragraphs", "It is too casual and lacks institutional protocol", "It has a clear subject line", "It uses the word 'Request'"], c: 1 
-    },
-    { 
-        q: "50. What are the <span class='c1'>4 essential components</span> of a <span class='c2'>formal email structure</span>?", 
-        t: "50. ما هي <span class='c1'>المكونات الأربعة الأساسية</span> لـ <span class='c2'>هيكل البريد الإلكتروني الرسمي</span>؟",
-        a: ["Subject, Greeting, Body, Closing", "Title, Picture, Body, Signature", "Greeting, Name, Date, File", "Subject, Text, Link, Thanks"], c: 0 
-    },
-    { 
-        q: "51. The <span class='c1'>'Subject Line'</span> in a formal email should be:", 
-        t: "51. <span class='c1'>'سطر الموضوع'</span> في البريد الإلكتروني الرسمي يجب أن يكون:",
-        a: ["Long and descriptive", "Clear, concise summary of the email's purpose", "Left empty", "Informal and casual"], c: 1 
-    },
-    { 
-        q: "52. Which of the following is an <span class='c1'>appropriate</span> formal <span class='c2'>closing phrase</span>?", 
-        t: "52. أي مما يلي يعتبر <span class='c1'>عبارة ختامية</span> رسمية <span class='c2'>مناسبة</span>؟",
-        a: ["Bye", "Yours sincerely", "Thanks", "See you later"], c: 1 
-    },
-    { 
-        q: "53. According to the <span class='c1'>'Pro Tip'</span>, how long should <span class='c2'>paragraphs</span> be?", 
-        t: "53. وفقاً لـ <span class='c1'>'نصيحة المحترفين'</span>، كم ينبغي أن يكون طول <span class='c2'>الفقرات</span>؟",
-        a: ["5-10 sentences", "2-3 sentences", "Exactly one word", "One very long paragraph"], c: 1 
-    },
-    { 
-        q: "54. What should you always do <span class='c1'>before hitting 'send'</span>?", 
-        t: "54. ماذا يجب عليك فعله دائماً <span class='c1'>قبل الضغط على 'إرسال'</span>؟",
-        a: ["Delete the subject line", "Change the tone to informal", "Proofread for spelling, grammar, and tone", "Add emojis"], c: 2 
-    },
-    { 
-        q: "55. According to Lecture 2, <span class='c1'>'Your words reflect</span> your <span class='c2'>professionalism</span>.'", 
-        t: "55. وفقاً للمحاضرة 2، <span class='c1'>'كلماتك تعكس</span> <span class='c2'>مهنيتك</span>.'",
-        a: ["Profit", "Professionalism", "Demand", "Register"], c: 1 },
-
-    // --- PART 2: Transformed Fill-in-the-Blanks (56 to 95) ---
-    { 
-        q: "56. English is considered the <span class='c1'>global language</span> of <span class='c2'>__________</span>.", 
-        t: "56. تُعتبر اللغة الإنجليزية <span class='c1'>اللغة العالمية</span> لـ <span class='c2'>__________</span>.",
-        a: ["literature", "business", "history", "poetry"], c: 1 
-    },
-    { 
-        q: "57. A <span class='c1'>__________</span> <span class='c2'>controls and supervises</span> work within an organization.", 
-        t: "57. الـ <span class='c1'>__________</span> <span class='c2'>يتنحكم ويشرف على</span> العمل داخل المؤسسة.",
-        a: ["clerk", "accountant", "manager", "intern"], c: 2 
-    },
-    { 
-        q: "58. The <span class='c1'>__________ department</span> handles <span class='c2'>employee recruitment</span> and hiring.", 
-        t: "58. <span class='c1'>قسم __________</span> يتولى <span class='c2'>توظيف الموظفين</span> وتعيينهم.",
-        a: ["Finance", "Accounting", "HR (Human Resources)", "Sales"], c: 2 
-    },
-    { 
-        q: "59. The <span class='c1'>__________ department</span> is responsible for <span class='c2'>managing company budgets</span>.", 
-        t: "59. <span class='c1'>قسم __________</span> مسؤول عن <span class='c2'>إدارة ميزانيات الشركة</span>.",
-        a: ["HR", "Marketing", "Finance", "Legal"], c: 2 
-    },
-    { 
-        q: "60. An <span class='c1'>office worker</span> who <span class='c2'>files documents</span> is called a <span class='c3'>__________</span>.", 
-        t: "60. <span class='c1'>موظف المكتب</span> الذي <span class='c2'>يؤرشف المستندات</span> يُسمى <span class='c3'>__________</span>.",
-        a: ["manager", "clerk", "director", "accountant"], c: 1 
-    },
-    { 
-        q: "61. In economics, a <span class='c1'>__________</span> is defined as a <span class='c2'>place of buying and selling</span>.", 
-        t: "61. في الاقتصاد، يتم تعريف <span class='c1'>__________</span> بأنه <span class='c2'>مكان للبيع والشراء</span>.",
-        a: ["factory", "market", "office", "warehouse"], c: 1 
-    },
-    { 
-        q: "62. <span class='c1'>__________</span> represents the <span class='c2'>amount of products</span> available for sale.", 
-        t: "62. الـ <span class='c1'>__________</span> يمثل <span class='c2'>كمية المنتجات</span> المتاحة للبيع.",
-        a: ["Demand", "Supply", "Profit", "Loss"], c: 1 
-    },
-    { 
-        q: "63. <span class='c1'>__________</span> represents the <span class='c2'>customer's need</span> for specific products.", 
-        t: "63. الـ <span class='c1'>__________</span> يمثل <span class='c2'>حاجة الزبون</span> لمنتجات معينة.",
-        a: ["Supply", "Quality", "Demand", "Price"], c: 2 
-    },
-    { 
-        q: "64. Business profit occurs when <span class='c1'>__________</span> is <span class='c2'>greater than expenses</span>.", 
-        t: "64. يحدث ربح الأعمال عندما يكون <span class='c1'>__________</span> <span class='c2'>أكبر من المصروفات</span>.",
-        a: ["loss", "debt", "income", "tax"], c: 2 
-    },
-    { 
-        q: "65. A business experiences a <span class='c1'>__________</span> when <span class='c2'>expenses are greater than income</span>.", 
-        t: "65. يواجه العمل التجاري <span class='c1'>__________</span> عندما تكون <span class='c2'>المصروفات أكبر من الإيرادات</span>.",
-        a: ["profit", "gain", "loss", "surplus"], c: 2 
-    },
-    { 
-        q: "66. Every company <span class='c1'>aims to</span> make a profit and <span class='c2'>avoid __________</span>.", 
-        t: "66. كل شركة <span class='c1'>تهدف إلى</span> تحقيق الربح و <span class='c2'>تجنب __________</span>.",
-        a: ["income", "growth", "loss", "investment"], c: 2 
-    },
-    { 
-        q: "67. Complete the expression: I am <span class='c1'>responsible __________</span> customer service.", 
-        t: "67. أكمل التعبير: أنا <span class='c1'>مسؤول __________</span> خدمة العملاء.",
-        a: ["to", "with", "for", "at"], c: 2 
-    },
-    { 
-        q: "68. Complete the expression: She is <span class='c1'>__________ charge of</span> the finance department.", 
-        t: "68. أكمل التعبير: هي <span class='c1'>__________ إدارة</span> قسم المالية (مسؤولة عنه).",
-        a: ["at", "in", "on", "by"], c: 1 
-    },
-    { 
-        q: "69. Complete the expression: I <span class='c1'>report __________</span> the manager.", 
-        t: "69. أكمل التعبير: أنا <span class='c1'>أرفع تقاريري (مسؤول أمام) __________</span> المدير.",
-        a: ["to", "for", "with", "under"], c: 0 
-    },
-    { 
-        q: "70. A <span class='c1'>__________</span> is a <span class='c2'>physical thing</span> that you can touch.", 
-        t: "70. الـ <span class='c1'>__________</span> هو <span class='c2'>شيء مادي</span> يمكنك لمسه.",
-        a: ["service", "product", "register", "expression"], c: 1 
-    },
-    { 
-        q: "71. A <span class='c1'>__________</span> is <span class='c2'>work</span> that someone does for you.", 
-        t: "71. الـ <span class='c1'>__________</span> هو <span class='c2'>عمل</span> يقوم به شخص ما من أجلك.",
-        a: ["product", "asset", "service", "good"], c: 2 
-    },
-    { 
-        q: "72. To <span class='c1'>get something</span> by <span class='c2'>paying money</span> is to __________.", 
-        t: "72. <span class='c1'>الحصول على شيء</span> عن طريق <span class='c2'>دفع المال</span> يعني أنك __________.",
-        a: ["sell", "buy", "trade", "rent"], c: 1 
-    },
-    { 
-        q: "73. To <span class='c1'>give something</span> for <span class='c2'>money</span> is to __________.", 
-        t: "73. <span class='c1'>إعطاء شيء</span> مقابل <span class='c2'>المال</span> يعني أنك __________.",
-        a: ["buy", "borrow", "sell", "produce"], c: 2 
-    },
-    { 
-        q: "74. The <span class='c1'>person who buys</span> something is known as the __________.", 
-        t: "74. <span class='c1'>الشخص الذي يشتري</span> شيئاً يُعرف بأنه الـ __________.",
-        a: ["seller", "manager", "customer", "clerk"], c: 2 
-    },
-    { 
-        q: "75. The <span class='c1'>person who sells</span> something is known as the __________.", 
-        t: "75. <span class='c1'>الشخص الذي يبيع</span> شيئاً يُعرف بأنه الـ __________.",
-        a: ["customer", "buyer", "seller", "accountant"], c: 2 
-    },
-    { 
-        q: "76. __________ refers to <span class='c1'>how good or bad</span> something is.", 
-        t: "76. الـ __________ يشير إلى <span class='c1'>مدى جودة أو رداءة</span> الشيء.",
-        a: ["Price", "Supply", "Quality", "Demand"], c: 2 
-    },
-    { 
-        q: "77. __________ refers to <span class='c1'>how much</span> something <span class='c2'>costs</span>.", 
-        t: "77. الـ __________ يشير إلى <span class='c1'>كم</span> <span class='c2'>يكلف</span> الشيء.",
-        a: ["Quality", "Price", "Value", "Profit"], c: 1 
-    },
-    { 
-        q: "78. Milk, bread, and soap are examples of products meant for <span class='c1'>__________ use</span>.", 
-        t: "78. الحليب والخبز والصابون هي أمثلة على منتجات مخصصة للاستخدام <span class='c1'>__________</span>.",
-        a: ["durable", "daily", "business", "annual"], c: 1 
-    },
-    { 
-        q: "79. A TV and refrigerator are classified as <span class='c1'>__________ goods</span>.", 
-        t: "79. يُصنف التلفزيون والثلاجة على أنهما <span class='c1'>سلع __________</span>.",
-        a: ["perishable", "daily", "durable", "temporary"], c: 2 
-    },
-    { 
-        q: "80. Equipment and tools used <span class='c1'>by companies to operate</span> are <span class='c2'>__________ products</span>.", 
-        t: "80. المعدات والأدوات المستخدمة <span class='c1'>من قِبل الشركات للعمل</span> هي <span class='c2'>منتجات __________</span>.",
-        a: ["personal", "consumer", "business", "free"], c: 2 
-    },
-    { 
-        q: "81. Services provided for <span class='c1'>individuals and daily life</span> are <span class='c2'>__________ services</span>.", 
-        t: "81. الخدمات المقدمة لـ <span class='c1'>الأفراد والحياة اليومية</span> هي <span class='c2'>خدمات __________</span>.",
-        a: ["business", "professional", "personal", "corporate"], c: 2 
-    },
-    { 
-        q: "82. Services requiring <span class='c1'>special training and expertise</span> are <span class='c2'>__________ services</span>.", 
-        t: "82. الخدمات التي تتطلب <span class='c1'>تدريباً خاصاً وخبرة</span> هي <span class='c2'>خدمات __________</span>.",
-        a: ["personal", "casual", "professional", "basic"], c: 2 
-    },
-    { 
-        q: "83. Friendly smile and quick service are characteristics of <span class='c1'>__________ customer service</span>.", 
-        t: "83. الابتسامة الودودة والخدمة السريعة هي من خصائص <span class='c1'>خدمة العملاء الـ __________</span>.",
-        a: ["bad", "slow", "good", "rude"], c: 2 
-    },
-    { 
-        q: "84. Rude behavior and ignoring customers are signs of <span class='c1'>__________ customer service</span>.", 
-        t: "84. السلوك الفظ وتجاهل الزبائن هي علامات على <span class='c1'>خدمة العملاء الـ __________</span>.",
-        a: ["good", "professional", "bad", "satisfactory"], c: 2 
-    },
-    { 
-        q: "85. Choosing our English style depending on the situation is called <span class='c1'>__________</span>.", 
-        t: "85. اختيار أسلوب لغتنا الإنجليزية اعتماداً على الموقف يُسمى <span class='c1'>__________</span>.",
-        a: ["vocabulary", "register", "grammar", "translation"], c: 1 
-    },
-    { 
-        q: "86. Informal English is used with friends, family, and close <span class='c1'>__________</span>.", 
-        t: "86. تُستخدم الإنجليزية غير الرسمية مع الأصدقاء والعائلة والـ <span class='c1'>__________</span> المقربين.",
-        a: ["managers", "directors", "colleagues", "institutions"], c: 2 
-    },
-    { 
-        q: "87. Formal English is used in offices, corporations, and <span class='c1'>__________</span>.", 
-        t: "87. تُستخدم الإنجليزية الرسمية في المكاتب والشركات والـ <span class='c1'>__________</span>.",
-        a: ["chat rooms", "universities", "casual parties", "family homes"], c: 1 
-    },
-    { 
-        q: "88. The tone of formal English should always be polite and <span class='c1'>__________</span>.", 
-        t: "88. نبرة اللغة الإنجليزية الرسمية يجب أن تكون دائماً مهذبة و <span class='c1'>__________</span>.",
-        a: ["casual", "demanding", "respectful", "relaxed"], c: 2 
-    },
-    { 
-        q: "89. The <span class='c1'>formal upgrade</span> for the informal phrase <span class='c2'>'want'</span> is __________.", 
-        t: "89. <span class='c1'>الترقية الرسمية</span> للكلمة غير الرسمية <span class='c2'>'want'</span> هي __________.",
-        a: ["get", "request / would like", "send", "tell"], c: 1 
-    },
-    { 
-        q: "90. The formal alternative for the word <span class='c1'>'tell'</span> is __________.", 
-        t: "90. البديل الرسمي لكلمة <span class='c1'>'tell'</span> هو __________.",
-        a: ["obtain", "inform", "assist", "request"], c: 1 
-    },
-    { 
-        q: "91. The formal alternative for the word <span class='c1'>'help'</span> is __________.", 
-        t: "91. البديل الرسمي لكلمة <span class='c1'>'help'</span> هو __________.",
-        a: ["assist", "obtain", "inform", "provide"], c: 0 
-    },
-    { 
-        q: "92. The formal alternative for the word <span class='c1'>'get'</span> is __________.", 
-        t: "92. البديل الرسمي لكلمة <span class='c1'>'get'</span> هو __________.",
-        a: ["provide", "send", "obtain", "request"], c: 2 
-    },
-    { 
-        q: "93. Instead of writing 'Send me', a professional writes 'Please <span class='c1'>__________</span>'.", 
-        t: "93. بدلاً من كتابة 'أرسل لي'، يكتب المحترف 'الرجاء <span class='c1'>__________</span>'.",
-        a: ["want", "provide", "get", "tell"], c: 1 
-    },
-    { 
-        q: "94. Every formal email must begin with a clear <span class='c1'>__________ line</span>.", 
-        t: "94. كل بريد إلكتروني رسمي يجب أن يبدأ بـ <span class='c1'>سطر __________</span> واضح.",
-        a: ["closing", "body", "subject", "signature"], c: 2 
-    },
-    { 
-        q: "95. In official business communication, 'Dear Sir/Madam' is a formal <span class='c1'>__________</span>.", 
-        t: "95. في مراسلات العمل الرسمية، تعتبر عبارة 'Dear Sir/Madam' <span class='c1'>__________</span> رسمية.",
-        a: ["closing", "greeting", "body", "subject"], c: 1 },
-
-    // --- PART 3: True / False (106 to 205) ---
-    { 
-        q: "106. Practical workplace English <span class='c1'>focuses on business communication</span> rather than literature.", 
-        t: "106. الإنجليزية العمليّة في مكان العمل <span class='c1'>تركز على التواصل التجاري</span> بدلاً من الأدب.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "107. The College of Administration & Economics design their lectures to <span class='c1'>last for 90 minutes</span>.", 
-        t: "107. صممت كلية الإدارة والاقتصاد محاضراتها <span class='c1'>لتستمر لمدة 90 دقيقة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "108. Students of administration and economics <span class='c1'>do not need</span> English for their future jobs.", 
-        t: "108. طلاب الإدارة والاقتصاد <span class='c1'>لا يحتاجون</span> إلى اللغة الإنجليزية لوظائفهم المستقبلية.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "109. English is recognized globally as the <span class='c1'>global language of business</span>.", 
-        t: "109. تُعرف اللغة الإنجليزية عالمياً بأنها <span class='c1'>اللغة العالمية للأعمال التجارية</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "110. In professional organizations, English is commonly used for <span class='c1'>writing emails</span>.", 
-        t: "110. في المؤسسات المهنية، تُستخدم الإنجليزية بشكل شائع لـ <span class='c1'>كتابة رسائل البريد الإلكتروني</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "111. International companies <span class='c1'>rarely require</span> their employees to use English.", 
-        t: "111. الشركات العالمية <span class='c1'>نادراً ما تطلب</span> من موظفيها استخدام اللغة الإنجليزية.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "112. A <span class='c1'>manager</span> is defined as an office worker who handles general tasks.", 
-        t: "112. يتم تعريف <span class='c1'>المدير</span> بأنه موظف مكتب يتولى المهام العامة اليومية.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "113. An <span class='c1'>accountant</span> is the role responsible for <span class='c2'>handling company money</span>.", 
-        t: "113. <span class='c1'>المحاسب</span> هو الدور المسؤول عن <span class='c2'>إدارة أموال الشركة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "114. The primary responsibility of <span class='c1'>Human Resources (HR)</span> is managing employees.", 
-        t: "114. المسؤولية الأساسية لـ <span class='c1'>الموارد البشرية (HR)</span> هي إدارة الموظفين.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "115. The <span class='c1'>Finance department</span> is strictly responsible for <span class='c2'>hiring new staff</span>.", 
-        t: "115. <span class='c1'>قسم المالية</span> مسؤول بشكل صارم ومباشر عن <span class='c2'>توظيف موظفين جدد</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "116. A <span class='c1'>clerk</span> is an office worker whose responsibilities include <span class='c2'>filing documents</span>.", 
-        t: "116. <span class='c1'>الكاتب الإداري</span> هو موظف مكتب تشمل مسؤولياته <span class='c2'>أرشفة الملفات والمستندات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "117. In a workplace context, the <span class='c1'>manager</span> is the person who <span class='c2'>supervises employees</span>.", 
-        t: "117. في سياق بيئة العمل، <span class='c1'>المدير</span> هو الشخص الذي <span class='c2'>يشرف على الموظفين</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "118. Preparing <span class='c1'>financial reports</span> is a core task performed by an <span class='c2'>accountant</span>.", 
-        t: "118. إعداد <span class='c1'>التقارير المالية</span> هي مهمة أساسية يقوم بها <span class='c2'>المحاسب</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "119. The <span class='c1'>HR department</span> is responsible for <span class='c2'>controlling the financial budget</span>.", 
-        t: "119. <span class='c1'>قسم الموارد البشرية</span> هو المسؤول عن <span class='c2'>التحكم في الميزانية المالية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "120. In basic economic terms, a <span class='c1'>market</span> is defined as a <span class='c2'>place of buying and selling</span>.", 
-        t: "120. في المصطلحات الاقتصادية الأساسية، يُعرف <span class='c1'>السوق</span> بأنه <span class='c2'>مكان للبيع والشراء</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "121. <span class='c1'>Supply</span> refers to the <span class='c2'>customer's need</span> for specific products.", 
-        t: "121. <span class='c1'>العرض</span> يشير إلى <span class='c2'>حاجة الزبائن</span> لمنتجات معينة في السوق.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "122. <span class='c1'>Demand</span> is defined as the <span class='c2'>amount of products available</span>.", 
-        t: "122. يُعرف <span class='c1'>الطلب</span> بأنه <span class='c2'>كمية المنتجات المتاحة</span> والمتوفرة في السوق.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "123. <span class='c1'>Profit</span> is defined as the <span class='c2'>money gained</span> from business operations.", 
-        t: "123. يُعرف <span class='c1'>الربح</span> بأنه <span class='c2'>الأموال المكتسبة</span> من العمليات التجارية.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "124. <span class='c1'>Loss</span> is defined as money gained when <span class='c2'>income is greater than expenses</span>.", 
-        t: "124. تُعرف <span class='c1'>الخسارة</span> بأنها المال المكتسب عندما يكون <span class='c2'>الإيراد أكبر من المصروفات</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "125. Profit occurs when business <span class='c1'>income is greater than expenses</span>.", 
-        t: "125. يحدث الربح عندما تكون <span class='c1'>إيرادات العمل أكبر من مصروفاته</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "126. Making a profit is the <span class='c1'>ultimate goal</span> of all business companies.", 
-        t: "126. تحقيق الربح هو <span class='c1'>الهدف النهائي والأسمى</span> لجميع الشركات التجارية.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "127. A business loss occurs when <span class='c1'>expenses are greater than income</span>.", 
-        t: "127. تحدث خسارة الأعمال عندما تكون <span class='c1'>المصروفات أكبر من الإيرادات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "128. A business loss is a result that companies <span class='c1'>actively try to achieve</span>.", 
-        t: "128. خسارة الأعمال هي نتيجة <span class='c1'>تحاول الشركات جاهدة تحقيقها</span> والوصول إليها.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "129. If a retail shop <span class='c1'>spends more money than it sells</span>, it results in profit.", 
-        t: "129. إذا كان المحل <span class='c1'>ينفق أموالاً أكثر مما يبيعه</span>، فإن ذلك يؤدي إلى ربح مالى.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "130. If a retail shop <span class='c1'>sells more goods than it spends</span>, it achieves profit.", 
-        t: "130. إذا كان المحل <span class='c1'>يبيع بضائع أكثر مما ينفقه</span>، فإنه يحقق ربحاً مالياً.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "131. Every company aims to <span class='c1'>make profit and avoid loss</span>.", 
-        t: "131. تهدف كل شركة إلى <span class='c1'>تحقيق الربح وتجنب الخسارة</span> في عملياتها.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "132. The expression <span class='c1'>'responsible for'</span> means having authority over a department.", 
-        t: "132. التعبير <span class='c1'>'responsible for'</span> يعني امتلاك سلطة كاملة أو التحكم في قسم ما.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "133. The expression <span class='c1'>'in charge of'</span> means having <span class='c2'>control or authority</span>.", 
-        t: "133. التعبير <span class='c1'>'in charge of'</span> يعني امتلاك <span class='c2'>التحكم أو السلطة النامّة</span> على مشروع أو قسم.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "134. 'I am <span class='c1'>responsible for customer service</span>' is a correct usage.", 
-        t: "134. عبارة 'أنا <span class='c1'>مسؤول عن خدمة العملاء</span>' هي استخدام صحيح لغوياً وسياقياً.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "135. 'She is <span class='c1'>in charge of the finance department</span>' is a correct usage.", 
-        t: "135. عبارة 'هي <span class='c1'>مسؤولة عن قسم المالية</span>' هي استخدام صحيح للتعبير في العمل.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "136. The workplace expression <span class='c1'>'report to'</span> means to be <span class='c2'>accountable to a superior</span>.", 
-        t: "136. تعبير بيئة العمل <span class='c1'>'report to'</span> يعني أن تكون <span class='c2'>مسؤولاً أمام رئيسك الإداري الأعلى</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "137. 'I report to the manager' means the <span class='c1'>manager is accountable to me</span>.", 
-        t: "137. عبارة 'أنا أرفع تقاريري للمدير' تعني أن <span class='c1'>المدير هو المسؤول أمامي ويحاسبني</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "138. Mastering workplace expressions enables <span class='c1'>accurate articulation of roles</span>.", 
-        t: "138. إتقان تعبيرات مكان العمل يمكّن من <span class='c1'>التعبير الدقيق الواضح عن الأدوار الوظيفية</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "139. In the practice section, the correct preposition to follow <span class='c1'>'responsible' is 'for'</span>.", 
-        t: "139. في قسم التدريب الإملائي، حرف الجر الصحيح الذي يتبع كلمة <span class='c1'>'responsible' هو 'for'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "140. In the practice section, the correct preposition to follow <span class='c1'>'report' is 'to'</span>.", 
-        t: "140. في قسم التدريب الإملائي، حرف الجر الصحيح الذي يتبع كلمة <span class='c1'>'report' هو 'to'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "141. First-year students of Management & Economics study <span class='c1'>products and services</span>.", 
-        t: "141. يدرس طلاب السنة الأولى في قسم الإدارة والاقتصاد <span class='c1'>المنتجات والخدمات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "142. A <span class='c1'>product</span> is defined in business as a <span class='c2'>physical thing you can touch</span>.", 
-        t: "142. يتم تعريف <span class='c1'>المنتج</span> في الأعمال بأنه <span class='c2'>شيء مادي ملموس يمكنك لمسه ورؤيته</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "143. A <span class='c1'>service</span> is defined as a <span class='c2'>physical object</span> that you can keep.", 
-        t: "143. يتم تعريف <span class='c1'>الخدمة</span> بأنها <span class='c2'>مجسم مادي ملموس</span> يمكنك الاحتفاظ به في منزلك.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "144. According to the textbook, a <span class='c1'>phone and car are business services</span>.", 
-        t: "144. وفقاً للكتاب الأكاديمي، يُعتبر <span class='c1'>الهاتف والسيارة من الخدمات التجارية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "145. A <span class='c1'>haircut and banking</span> are classified as examples of <span class='c2'>products</span>.", 
-        t: "145. تُصنف <span class='c1'>قصة الشعر والخدمات المصرفية</span> كأمثلة واضحة على <span class='c2'>المنتجات المادية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "146. In business, companies sell products and services <span class='c1'>directly to customers</span>.", 
-        t: "146. في الأعمال التجارية، تبيع الشركات المنتجات والخدمات <span class='c1'>مباشرة للزبائن</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "147. <span class='c1'>Education and a taxi ride</span> are explicitly listed as <span class='c2'>services</span>.", 
-        t: "147. تم إدراج <span class='c1'>التعليم وتوصيلة التاكسي</span> صراحة كأمثلة مباشرة على <span class='c2'>الخدمات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "148. A <span class='c1'>book and food</span> are classified as examples of <span class='c2'>physical products</span>.", 
-        t: "148. يُصنف <span class='c1'>الكتاب والطعام</span> كأمثلة صريحة على <span class='c2'>المنتجات المادية</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "149. To <span class='c1'>'buy'</span> means to <span class='c2'>give something</span> to another person for money.", 
-        t: "149. كلمة <span class='c1'>'شراء'</span> تعني <span class='c2'>إعطاء شيء ما</span> لشخص آخر مقابل الحصول على المال.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "150. To <span class='c1'>'sell'</span> means to <span class='c2'>give something</span> to another person for money.", 
-        t: "150. كلمة <span class='c1'>'بيع'</span> تعني <span class='c2'>إعطاء شيء ما</span> لشخص آخر مقابل الحصول على المال.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "151. 'I <span class='c1'>buy coffee</span> every morning' is a correct context sentence.", 
-        t: "151. جملة 'أنا <span class='c1'>أشتري القهوة</span> كل صباح' هي سياق تعبيري صحيح لاستخدام الفعل.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "152. 'The <span class='c1'>shop sells phones</span>' is a correct context sentence.", 
-        t: "152. جملة 'المحل <span class='c1'>يبيع الهواتف</span>' هي سياق تعبيري صحيح تماماً لاستخدام الفعل.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "153. A <span class='c1'>customer</span> is defined as the person who <span class='c2'>sells something</span>.", 
-        t: "153. يتم تعريف <span class='c1'>الزبون</span> بأنه الشخص الذي <span class='c2'>يبيع شيئاً ما</span> للآخرين.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "154. A <span class='c1'>seller</span> is defined as the person who <span class='c2'>sells something</span> to a customer.", 
-        t: "154. يتم تعريف <span class='c1'>البائع</span> بأنه الشخص الذي <span class='c2'>يبيع شيئاً ما</span> للزبون العميل.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "155. <span class='c1'>Quality</span> is defined as <span class='c2'>how much a specific product costs</span>.", 
-        t: "155. يتم تعريف <span class='c1'>الجودة</span> بأنها <span class='c2'>مقدار تكلفة أو سعر منتج معين</span> في السوق التجاري.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "156. <span class='c1'>Price</span> is defined as <span class='c2'>how much</span> a product or service <span class='c3'>costs</span>.", 
-        t: "156. يتم تعريف <span class='c1'>السعر</span> بأنه <span class='c2'>كم</span> <span class='c3'>يكلف</span> المنتج أو الخدمة مالياً عند الشراء.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "157. 'This phone has <span class='c1'>good quality</span>' is an example of talking about <span class='c2'>price</span>.", 
-        t: "157. عبارة 'هذا الهاتف ذو <span class='c1'>جودة جيدة</span>' هي مثال حي على التحدث عن <span class='c2'>السعر والتكلفة</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "158. <span class='c1'>Customer service</span> is defined as <span class='c2'>providing help</span> for customers.", 
-        t: "158. تُعرّف <span class='c1'>خدمة العملاء العملاء</span> بأنها <span class='c2'>تقديم العون والمساعدة</span> للزبائن والعملاء.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "159. Good customer service directly <span class='c1'>makes customers unhappy</span>.", 
-        t: "159. تقديم خدمة عملاء ممتازة وجيدة يؤدي مباشرة إلى <span class='c1'>جعل الزبائن مستائين وغير سعداء</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "160. A price of <span class='c1'>$5</span> is classified in the text as a <span class='c2'>high price</span>.", 
-        t: "160. تكلفة سعر بقيمة <span class='c1'>5 دولارات</span> تُصنف في أمثلة الدرس على أنها <span class='c2'>سعر مرتفع جداً</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "161. A price of <span class='c1'>$500</span> is classified in the text as a <span class='c2'>high price</span>.", 
-        t: "161. تكلفة سعر بقيمة <span class='c1'>500 دولار</span> تُصنف في أمثلة الدرس على أنها <span class='c2'>سعر مرتفع عالٍ</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "162. <span class='c1'>Consumer products</span> include goods for daily use and <span class='c2'>durable goods</span>.", 
-        t: "162. تشمل <span class='c1'>المنتجات الاستهلاكية</span> السلع المخصصة للاستخدام اليومي والـ <span class='c2'>سلع المعمرة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "163. Milk, bread, and soap are classified as <span class='c1'>durable goods</span>.", 
-        t: "163. الحليب، الخبز، والصابون يتم تصنيفها كـ <span class='c1'>سلع معمرة طوية الأمد</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "164. A <span class='c1'>TV and refrigerator</span> are examples of <span class='c2'>durable goods</span>.", 
-        t: "164. يُعتبر <span class='c1'>التلفزيون والثلاجة</span> من الأمثلة الصريحة على <span class='c2'>السلع المعمرة الاستهلاكية</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "165. <span class='c1'>Business products</span> are used by consumers for <span class='c2'>daily home life</span>.", 
-        t: "165. تُستخدم <span class='c1'>المنتجات التجارية</span> من قبل المستهلكين الأفراد من أجل <span class='c2'>الحياة المنزلية اليومية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "166. Machines and computers are classified as <span class='c1'>equipment and tools</span>.", 
-        t: "166. يتم تصنيف الآلات الضخمة وأجهزة الكمبيوتر كـ <span class='c1'>معدات وأدوات للعمل التجاري</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "167. <span class='c1'>Office furniture</span> is classified as part of office and <span class='c2'>infrastructure</span>.", 
-        t: "167. يُصنف <span class='c1'>أثاث المكتب</span> كجزء أساسي من المكاتب والـ <span class='c2'>بنية التحتية للشركات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "168. <span class='c1'>Personal services</span> are designed to <span class='c2'>support companies</span>.", 
-        t: "168. تم تصميم <span class='c1'>الخدمات الشخصية</span> خصيصاً من أجل <span class='c2'>دعم ومساندة الشركات والمؤسسات</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "169. A <span class='c1'>hair salon, gym, and restaurant</span> are personal services.", 
-        t: "169. صالون الحلاقة، <span class='c1'>الصالة الرياضية (Gym)، والمطعم</span> هي خدمات شخصية للأفراد.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "170. <span class='c1'>Business services</span> include banking, cleaning, and <span class='c2'>delivery</span>.", 
-        t: "170. تشمل <span class='c1'>الخدمات التجارية</span> المعاملات المصرفية، التنظيف، والـ <span class='c2'>توصيل للشركات</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "171. <span class='c1'>Professional services</span> require <span class='c2'>special training</span> and expertise.", 
-        t: "171. تتطلب <span class='c1'>الخدمات المهنية المتخصصة</span> خضوع الفرد لـ <span class='c2'>تدريب خاص ومكثف</span> وخبرة عالية.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "172. A <span class='c1'>doctor, teacher, and lawyer</span> are professional services.", 
-        t: "172. يُعتبر كل من <span class='c1'>الطبيب، المعلم، والمحامي</span> من مقدمي الخدمات المهنية المتخصصة.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "173. The questions 'How much is this?' are used for asking about <span class='c1'>quality</span>.", 
-        t: "173. الأسئلة الاستفسارية مثل 'بكم هذا؟' تُستخدم عادةً عند السؤال والتحري عن <span class='c1'>الجودة</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "174. The phrases 'It has good quality' are used when talking about <span class='c1'>quality</span>.", 
-        t: "174. العبارات التعبيرية مثل 'إنه ذو جودة عالية' تُستخدم عند الحديث والتقييم لـ <span class='c1'>الجودة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "175. The phrases 'I'll buy it' are used when <span class='c1'>making a purchase</span>.", 
-        t: "175. الجمل القاطعة مثل 'سأقوم بشرائه' تُستخدم من قِبل الزبون عند <span class='c1'>إجراء عملية شراء فعليّة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "176. Having a <span class='c1'>friendly smile</span> means staff are welcoming and happy.", 
-        t: "176. امتلاك <span class='c1'>ابتسامة ودودة</span> يدل على أن طاقم العمل مرحب بالزبائن وسعيد بمساعدتهم.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "177. Clear information that helps a customer decide is <span class='c1'>quick service</span>.", 
-        t: "177. توفير معلومات واضحة وجلية تساعد الزبون على اتخاذ القرار يُعرف بـ <span class='c1'>الخدمة السريعة</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "178. <span class='c1'>Quick service</span> means that the customer <span class='c2'>does not wait too long</span>.", 
-        t: "178. تعني <span class='c1'>الخدمة السريعة</span> أن الزبون العميل <span class='c2'>لا ينتظر طويلاً للحصول على طلبيته</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "179. <span class='c1'>Showing appreciation</span> involves saying <span class='c2'>'Thank You'</span>.", 
-        t: "179. إن <span class='c1'>إظهار التقدير والامتنان للعميل</span> يتضمن بشكل أساسي قول كلمة <span class='c2'>'شكراً لك'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "180. <span class='c1'>Rude behavior</span> means staff are <span class='c2'>impolite or disrespectful</span>.", 
-        t: "180. يعني <span class='c1'>السلوك الفظ والسيء</span> أن طاقم الموظفين <span class='c2'>غير مهذبين أو يفتقرون للاحترام</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "181. <span class='c1'>Slow service</span> means that a customer waits a <span class='c2'>very short time</span>.", 
-        t: "181. تعني <span class='c1'>الخدمة البطيئة</span> أن العميل ينتظر <span class='c2'>لفترة قصيرة جداً وموجزة</span> للحصول على المساعدة.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "182. <span class='c1'>'No Help'</span> is defined as staff <span class='c2'>ignoring the customer</span>.", 
-        t: "182. يتم تعريف حالة <span class='c1'>'عدم تقديم المساعدة'</span> بأنها قيام الموظفين بـ <span class='c2'>تجاهل الزبون تماماً</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "183. An <span class='c1'>'Unhappy Face'</span> means that staff look <span class='c2'>angry or bored</span>.", 
-        t: "183. تعبير <span class='c1'>'الوجه العبوس/غير السعيد'</span> يعني أن الموظفين يبدون <span class='c2'>غاضبين أو يشعرون بالملل</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "184. Lecture 2 focuses on teaching <span class='c1'>formal emails</span> and administrative writing.", 
-        t: "184. تركز المحاضرة الثانية بشكل مكثف على تعليم <span class='c1'>رسائل البريد الإلكتروني الرسمية</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "185. Developing <span class='c1'>professional communication</span> skills is required for academics.", 
-        t: "185. تطوير مهارات <span class='c1'>التواصل المهني والوظيفي</span> مطلوب وأمر أساسي للمراسلات الأكاديمية.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "186. Students <span class='c1'>do not need to distinguish</span> between formal and informal English.", 
-        t: "186. الطلاب <span class='c1'>ليسوا بحاجة للتمييز والتفريق</span> بين الإنجليزية الرسمية وغير الرسمية.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "187. <span class='c1'>Register</span> refers to <span class='c2'>choosing our English style</span> depending on the reader.", 
-        t: "187. مصطلح <span class='c1'>Register (مستوى اللغة)</span> يشير إلى <span class='c2'>اختيار نمط وأسلوب لغتنا</span> تماشياً مع القارئ.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "188. <span class='c1'>Informal English</span> is appropriate to use with <span class='c2'>offices and universities</span>.", 
-        t: "188. استخدام <span class='c1'>اللغة الإنجليزية غير الرسمية</span> يُعد أمراً مناسباً مع <span class='c2'>المكاتب والجامعات</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "189. Informal English is typically used with <span class='c1'>friends and family</span>.", 
-        t: "189. الإنجليزية غير الرسمية تُستخدم عادةً وبشكل طبيعي مع <span class='c1'>الأصدقاء وأفراد العائلة</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "190. Text messages and chat platforms are mediums for <span class='c1'>formal English</span>.", 
-        t: "190. رسائل الهاتف النصية ومنصات المحادثة تعتبر وسائط ملائمة لـ <span class='c1'>اللغة الإنجليزية الرسمية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "191. The tone of informal English is <span class='c1'>casual and conversational</span>.", 
-        t: "191. نبرة الإنجليزية غير الرسمية تكون <span class='c1'>عفوية، مريحة، وذات طابع حواري يومي</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "192. The tone of formal English is <span class='c1'>polite, respectful, and indirect</span>.", 
-        t: "192. نبرة اللغة الإنجليزية الرسمية تتسم بأنها <span class='c1'>مهذبة، محترمة، وغير مباشرة</span> لبيان الأدب.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "193. <span class='c1'>Context does not determine</span> your communication style in business.", 
-        t: "193. إن <span class='c1'>السياق والمحيط لا يحدد</span> أسلوب ونمط تواصلك في عالم المال والأعمال.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "194. Using <span class='c1'>formal vocabulary</span> demonstrates respect for your reader.", 
-        t: "194. الاستعانة بـ <span class='c1'>المفردات اللغوية الرسمية</span> يعبر بوضوح عن احترامك البالغ للقارئ المستلم.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "195. Universities and colleges <span class='c1'>accept informal text language</span>.", 
-        t: "195. الجامعات والكليات الأكاديمية <span class='c1'>تقبل لغة الرسائل النصية العامية وغير الرسمية</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "196. The informal word <span class='c1'>'Hi'</span> can be upgraded to <span class='c2'>'Dear Sir/Madam'</span>.", 
-        t: "196. الكلمة العامية الترحيبية <span class='c1'>'Hi'</span> يمكن ترقيتها رسمياً وتعديلها إلى <span class='c2'>'Dear Sir/Madam'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "197. <span class='c1'>'I want'</span> is a formal phrase that should be used <span class='c2'>frequently</span>.", 
-        t: "197. عبارة <span class='c1'>'أنا أريد' (I want)</span> تعتبر جملة رسمية يجب استخدامها <span class='c2'>بكثرة وتكرار</span> في الكتب.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "198. The formal business equivalent of the verb <span class='c1'>'Tell' is 'Inform'</span>.", 
-        t: "198. المقابل المهني الرسمي في إنجليزية الأعمال للفعل العادي <span class='c1'>'Tell' هو الفعل 'Inform'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "199. <span class='c1'>'Assist'</span> is the professional, formal upgrade for <span class='c2'>'Help'</span>.", 
-        t: "199. الفعل <span class='c1'>'Assist'</span> يُمثّل الترقية الرسمية والمهنية الأنسب للفعل الشائع <span class='c2'>'Help'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "200. The informal verb <span class='c1'>'Get'</span> can be upgraded to <span class='c2'>'Obtain'</span>.", 
-        t: "200. الفعل غير الرسمي المستخدم يومياً <span class='c1'>'Get'</span> يمكن ترقيته رسمياً إلى الفعل <span class='c2'>'Obtain'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "201. <span class='c1'>'Please provide'</span> is a polite upgrade for <span class='c2'>'Send me'</span>.", 
-        t: "201. تعبير <span class='c1'>'الرجاء تزويدنا بـ'</span> يمثل ترقية مهذبة جداً للأمر المباشر الجاف <span class='c2'>'أرسل لي'</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "202. An email starting with <span class='c1'>'Hi'</span> and using <span class='c2'>'I want'</span> is highly appropriate.", 
-        t: "202. رسالة البريد المبتدئة بـ <span class='c1'>'Hi'</span> والمستخدمة لعبارة <span class='c2'>'أنا أريد'</span> تعد ملائمة ومناسبة جداً.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "203. The phrase <span class='c1'>'I want'</span> sounds <span class='c2'>demanding rather than requesting</span>.", 
-        t: "203. العبارة المباشرة <span class='c1'>'أنا أريد'</span> تبدو في نبرتها <span class='c2'>آمرة ومستعلية بدلاً من كونها طلباً مهذباً</span>.",
-        a: ["True", "False"], c: 0 
-    },
-    { 
-        q: "204. In email standards, the closing <span class='c1'>'Thanks' is completely sufficient</span>.", 
-        t: "204. في معايير المراسلات المهنية، يُعتبر الختام بكلمة <span class='c1'>'Thanks' كافياً ووافياً تماماً</span>.",
-        a: ["True", "False"], c: 1 
-    },
-    { 
-        q: "205. An email lacking a <span class='c1'>subject line</span> can be perceived as <span class='c2'>unprofessional</span>.", 
-        t: "205. البريد الإلكتروني الذي يفتقر لـ <span class='c1'>سطر موضوع واضح</span> قد يفسره المستلم كعمل <span class='c2'>غير مهني</span>.",
-        a: ["True", "False"], c: 0 
-    }
-];
-
-let correctAnswersCount = 0;
-let totalAnsweredCount = 0;
-
-const container = document.getElementById('quiz-container');
-const liveScoreElement = document.getElementById('live-score');
-const answeredCountElement = document.getElementById('answered-count');
-const scoreContainer = document.getElementById('score-container');
-
-quizData.forEach((item, qIndex) => {
-    const card = document.createElement('div');
-    card.className = 'question-card';
-    
-    const qText = document.createElement('div');
-    qText.className = 'question-text';
-    qText.innerHTML = item.q;
-    card.appendChild(qText);
-    
-    // إضافة الترجمة الملونة أسفل السؤال مباشرة
-    if(item.t) {
-        const tText = document.createElement('div');
-        tText.className = 'translation-text';
-        tText.innerHTML = item.t;
-        card.appendChild(tText);
-    }
-    
-    const optionsList = document.createElement('ul');
-    optionsList.className = 'options-list';
-    
-    item.a.forEach((option, oIndex) => {
-        const optionItem = document.createElement('li');
-        optionItem.className = 'option-item';
-        optionItem.innerText = option;
+        <h1 class="title">سيف علي</h1>
         
-        optionItem.addEventListener('click', () => {
-            const allOptions = optionsList.querySelectorAll('.option-item');
-            allOptions.forEach(opt => opt.classList.add('disabled'));
+        <div class="cyber-subtitle">
+            <span id="cyber-target"></span><span class="cyber-cursor"></span>
+        </div>
+
+        <div class="links-container">
+            <a href="https://t.me/WWGTR" target="_blank" class="glass-btn">تليجرام</a>
+            <a href="https://instagram.com/NE_7U" target="_blank" class="glass-btn">انستجرام</a>
+        </div>
+
+        <div class="dashboard-widget">
+            <div class="widget-item">
+                <span class="item-label">المتصفح النشط</span>
+                <span class="item-value" id="browser-name">جاري الفحص</span>
+            </div>
+            <div class="widget-item">
+                <span class="item-label">الموقع الحالي</span>
+                <span class="item-value" id="user-location">جاري التحديد</span>
+            </div>
+        </div>
+
+        <div class="footer-credits">
+            &copy; 2026 Saif Ali. Crafted with Brilliance.
+        </div>
+    </div>
+
+    <script>
+        // 1. برمجة محرك الشفق السائل وشبكة جزيئات السايبر (Liquid Aurora & Cyber Mesh)
+        const canvas = document.getElementById('interactive-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let mouse = { x: undefined, y: undefined, radius: 150 };
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+
+        const updatePointer = (e) => {
+            mouse.x = e.touches ? e.touches[0].clientX : e.clientX;
+            mouse.y = e.touches ? e.touches[0].clientY : e.clientY;
+        };
+        window.addEventListener('mousemove', updatePointer);
+        window.addEventListener('touchmove', updatePointer);
+        window.addEventListener('mouseleave', () => { mouse.x = undefined; mouse.y = undefined; });
+        window.addEventListener('touchend', () => { mouse.x = undefined; mouse.y = undefined; });
+
+        // إعداد الهالات الضوئية المتحركة في الخلفية (Liquid Aurora)
+        let auroraBlobs = [
+            { x: 0, y: 0, vx: 0.3, vy: 0.4, radius: 400, color: 'rgba(168, 85, 247, 0.12)' },
+            { x: 0, y: 0, vx: -0.2, vy: -0.3, radius: 450, color: 'rgba(59, 130, 246, 0.1)' }
+        ];
+        auroraBlobs[0].x = width * 0.2; auroraBlobs[0].y = height * 0.3;
+        auroraBlobs[1].x = width * 0.8; auroraBlobs[1].y = height * 0.7;
+
+        // توليد الجزيئات للشبكة المتصلة
+        const numParticles = Math.min(Math.floor(window.innerWidth / 12), 70);
+        let particles = [];
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                size: Math.random() * 1.5 + 0.5,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3
+            });
+        }
+
+        function renderSystem() {
+            ctx.fillStyle = '#030307';
+            ctx.fillRect(0, 0, width, height);
+
+            // 1. رسم وتحريك الأورورا السائلة الفخمة
+            auroraBlobs.forEach(b => {
+                b.x += b.vx; b.y += b.vy;
+                if (b.x < 0 || b.x > width) b.vx *= -1;
+                if (b.y < 0 || b.y > height) b.vy *= -1;
+
+                let grad = ctx.createRadialGradient(b.x, b.y, 10, b.x, b.y, b.radius);
+                grad.addColorStop(0, b.color);
+                grad.addColorStop(1, 'transparent');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 2. تحريك ورسم جزيئات ومصفوفة الشبكة المتصلة (Cyber Mesh Grid)
+            particles.forEach((p, idx) => {
+                p.x += p.vx; p.y += p.vy;
+
+                // التفاعل مع حركات الماوس واللمس بالجاذبية الناعمة
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    let dx = mouse.x - p.x;
+                    let dy = mouse.y - p.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        p.x += (dx / dist) * 1.2;
+                        p.y += (dy / dist) * 1.2;
+                    }
+                }
+
+                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.size > 1.3 ? 'rgba(168, 85, 247, 0.5)' : 'rgba(255, 255, 255, 0.4)';
+                ctx.fill();
+
+                // رسم خيوط الشبكة البرمجية الفاخرة بين النقاط المتقاربة
+                for (let j = idx + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dx = p.x - p2.x;
+                    let dy = p.y - p2.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.06 - (dist / 100) * 0.06})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(renderSystem);
+        }
+        renderSystem();
+
+
+        // 2. برمجة تأثير فك التشفير البرمجي لجملة (خلصنا امتحان)
+        const targetText = "خلصنا امتحان";
+        const glyphs = "0110101100110101101001110010101101100101110111110111011";
+        const element = document.getElementById('glitch-target');
+        let iterations = 0;
+        let interval = null;
+
+        function startDecryption() {
+            clearInterval(interval);
+            iterations = 0;
             
-            totalAnsweredCount++;
-            answeredCountElement.innerText = totalAnsweredCount;
-            
-            if (oIndex === item.c) {
-                optionItem.classList.add('correct');
-                correctAnswersCount++;
+            interval = setInterval(() => {
+                element.innerText = targetText
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iterations) {
+                            return targetText[index];
+                        }
+                        return glyphs[Math.floor(Math.random() * glyphs.length)];
+                    })
+                    .join("");
+
+                if (iterations >= targetText.length) {
+                    clearInterval(interval);
+                    setTimeout(startDecryption, 4500); // تكرار النبض البرمجي الممتع كل 4.5 ثوانٍ
+                }
+                iterations += 1 / 3;
+            }, 45);
+        }
+        startDecryption();
+
+
+        // 3. برمجة تأثير التشفير المحترف المستمر لوصف (مطور تطبيقات)
+        const cyberText = "مطور تطبيقات";
+        const cyberElement = document.getElementById('cyber-target');
+        let cyberIndex = 0;
+
+        function typeCyberEffect() {
+            if (cyberIndex < cyberText.length) {
+                cyberElement.innerText += cyberText[cyberIndex];
+                cyberIndex++;
+                setTimeout(typeCyberEffect, 140);
             } else {
-                optionItem.classList.add('incorrect');
-                allOptions[item.c].classList.add('correct');
+                setTimeout(() => { eraseCyberEffect(); }, 3500);
             }
-            
-            liveScoreElement.innerText = correctAnswersCount;
-            
-            scoreContainer.classList.add('highlight');
-            setTimeout(() => scoreContainer.classList.remove('highlight'), 300);
-        });
-        
-        optionsList.appendChild(optionItem);
-    });
-    
-    card.appendChild(optionsList);
-    container.appendChild(card);
-});
-</script>
+        }
 
+        function eraseCyberEffect() {
+            if (cyberIndex > 0) {
+                cyberElement.innerText = cyberText.substring(0, cyberIndex - 1);
+                cyberIndex--;
+                setTimeout(eraseCyberEffect, 70);
+            } else {
+                setTimeout(typeCyberEffect, 600);
+            }
+        }
+        setTimeout(typeCyberEffect, 800);
+
+
+        // 4. تأثير تمايل ثلاثي الأبعاد ناعم وفاخر مخصص للحواسب والأجهزة القوية
+        if (window.innerWidth > 768) {
+            const card = document.getElementById('card');
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            document.addEventListener('mouseleave', () => {
+                card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            });
+        }
+
+        // 5. فحص بيئة المتصفح وجلب الموقع التقريبي
+        function detectBrowser() {
+            const ua = navigator.userAgent;
+            let browser = "متصفح ذكي";
+            if (ua.indexOf("Firefox") > -1) browser = "Firefox";
+            else if (ua.indexOf("SamsungBrowser") > -1) browser = "Samsung Internet";
+            else if (ua.indexOf("Edg/") > -1) browser = "MS Edge";
+            else if (ua.indexOf("Chrome") > -1) browser = "Chrome";
+            else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) browser = "Safari";
+            document.getElementById('browser-name').textContent = browser;
+        }
+
+        async function fetchGeo() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('user-location').textContent = data.city || data.country_name;
+                } else {
+                    document.getElementById('user-location').textContent = "آمن ومحمي";
+                }
+            } catch {
+                document.getElementById('user-location').textContent = "مجهول";
+            }
+        }
+
+        detectBrowser();
+        fetchGeo();
+    </script>
 </body>
 </html>
